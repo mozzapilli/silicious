@@ -103,9 +103,9 @@ p  { margin: 0 0 1em; }
 section p, .racconto-annata p, .dati dd { max-width: 68ch; }
 
 .occhiello {
-  font-size: .8rem;
+  font-size: clamp(1rem, 1.5vw, 1.35rem);
   font-weight: 600;
-  letter-spacing: .14em;
+  letter-spacing: .1em;
   text-transform: uppercase;
   color: var(--terra);
   margin: 0 0 1.4em;
@@ -196,22 +196,29 @@ section.alt:nth-of-type(3n)   { background: var(--pastello-3); }
 
 /* -------------------------------- Hero ---------------------------------- */
 
-.hero { padding-block: clamp(56px, 9vw, 120px) clamp(64px, 10vw, 140px); }
-.hero .logo-grande { width: min(200px, 42vw); margin: 0 0 clamp(36px, 5vw, 64px); color: var(--inchiostro); }
+/* L'apertura è centrata: il marchio disegnato sta al centro della pagina e
+   tutto quello che segue si allinea a lui. */
+.hero { padding-block: clamp(48px, 7vw, 96px) clamp(64px, 10vw, 140px); text-align: center; }
+.hero .logo-grande {
+  width: min(300px, 62vw); margin: 0 auto clamp(40px, 6vw, 72px); color: var(--inchiostro);
+}
 .hero .payoff {
-  font-size: clamp(2.6rem, 7.4vw, 5.6rem);
-  font-weight: 500; line-height: 1.02; letter-spacing: -0.035em;
-  max-width: 16ch; margin: 0 0 .35em; color: var(--inchiostro);
+  font-size: clamp(2.4rem, 6.4vw, 4.8rem);
+  font-weight: 500; line-height: 1.05; letter-spacing: -0.035em;
+  max-width: 20ch; margin: 0 auto .45em; color: var(--inchiostro);
 }
 .hero .sottotitolo {
-  max-width: 52ch; margin: 0; color: var(--inchiostro-lieve);
-  font-size: clamp(1.05rem, 1.7vw, 1.3rem); line-height: 1.5;
+  max-width: 60ch; margin: 0 auto; color: var(--inchiostro-lieve);
+  font-size: clamp(1.1rem, 1.8vw, 1.4rem); line-height: 1.55;
 }
-.hero .btn-riga { justify-content: flex-start; }
+.hero .btn-riga { justify-content: center; }
+/* Senza margin-inline auto il blocco resterebbe a sinistra e il testo si
+   centrerebbe dentro di lui invece che nella pagina. */
+.hero .tagline { margin: 0 auto clamp(24px, 3vw, 38px); max-width: none; }
 
 .tagline {
-  font-size: .82rem; font-weight: 600;
-  letter-spacing: .28em; text-transform: uppercase; color: var(--terra);
+  font-size: clamp(1.05rem, 1.7vw, 1.45rem); font-weight: 600;
+  letter-spacing: .2em; text-transform: uppercase; color: var(--terra);
   margin: 0 0 clamp(20px, 3vw, 34px);
 }
 
@@ -230,7 +237,7 @@ section.alt:nth-of-type(3n)   { background: var(--pastello-3); }
   line-height: .95; color: var(--inchiostro); display: block; margin-bottom: 14px;
 }
 .kpi .etichetta {
-  font-size: .88rem; letter-spacing: .06em; text-transform: uppercase;
+  font-size: 1.08rem; letter-spacing: .05em; text-transform: uppercase;
   color: var(--inchiostro-lieve); font-weight: 600;
 }
 .kpi .nota { font-size: .8rem; color: var(--terra); margin-top: 6px; }
@@ -248,8 +255,8 @@ section.alt .scheda { background: var(--carta); }
 .scheda p:last-child { margin-bottom: 0; }
 .scheda p { font-size: .98rem; }
 .scheda .meta {
-  font-size: .78rem; letter-spacing: .12em; text-transform: uppercase;
-  color: var(--terra); margin-bottom: 14px; font-weight: 600;
+  font-size: 1rem; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--terra); margin-bottom: 16px; font-weight: 600;
 }
 .scheda-link { text-decoration: none; color: inherit; transition: transform .2s ease; }
 .scheda-link:hover { transform: translateY(-4px); }
@@ -271,7 +278,7 @@ section.alt .scheda { background: var(--carta); }
 .tempo .testata { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: baseline; margin-bottom: 6px; }
 .tempo .titolo { font-size: clamp(1.3rem, 2.2vw, 1.7rem); font-weight: 600; letter-spacing: -0.025em; }
 .tempo .fase {
-  font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; font-weight: 600;
+  font-size: .9rem; letter-spacing: .08em; text-transform: uppercase; font-weight: 600;
   padding: 3px 9px; border-radius: 999px; border: 1px solid var(--linea); color: var(--inchiostro-lieve);
 }
 .tempo .fase.ampolla   { border-color: var(--vetro); color: var(--vetro); }
@@ -347,7 +354,7 @@ section.alt .scheda { background: var(--carta); }
   color: var(--vino);
 }
 .ampolla-fase {
-  font-size: .78rem; letter-spacing: .12em; text-transform: uppercase;
+  font-size: .98rem; letter-spacing: .08em; text-transform: uppercase;
   color: var(--terra); font-weight: 600;
 }
 .ampolla-manca { color: var(--inchiostro-lieve); font-size: .95rem; }
@@ -387,7 +394,7 @@ section.alt .scheda { background: var(--carta); }
 }
 .indice .numero small { font-size: .4em; color: var(--inchiostro-lieve); }
 .indice .etichetta {
-  font-size: .8rem; letter-spacing: .08em; text-transform: uppercase;
+  font-size: 1.05rem; letter-spacing: .05em; text-transform: uppercase;
   font-weight: 600; color: var(--inchiostro-lieve);
 }
 .indice .scarto { font-size: .88rem; color: var(--terra); }
@@ -442,7 +449,7 @@ section.alt .scheda { background: var(--carta); }
   padding: 16px 0; border-bottom: 1px solid var(--linea);
 }
 .dati dt, .dati .voce {
-  font-size: .8rem; letter-spacing: .08em; text-transform: uppercase;
+  font-size: .98rem; letter-spacing: .06em; text-transform: uppercase;
   font-weight: 600; color: var(--inchiostro-lieve); margin: 0;
 }
 .dati dd, .dati .valore { margin: 0; }
@@ -466,7 +473,7 @@ section.alt .scheda { background: var(--carta); }
 
 .modulo { display: grid; gap: 18px; max-width: var(--stretto); }
 .campo { display: flex; flex-direction: column; gap: 6px; }
-.campo label { font-size: .82rem; letter-spacing: .06em; text-transform: uppercase; font-weight: 600; color: var(--inchiostro-lieve); }
+.campo label { font-size: 1rem; letter-spacing: .05em; text-transform: uppercase; font-weight: 600; color: var(--inchiostro-lieve); }
 .campo input, .campo textarea, .campo select {
   font: inherit; font-size: .97rem; color: var(--inchiostro);
   background: var(--carta); border: 1px solid var(--linea); border-radius: var(--radius);
@@ -490,7 +497,7 @@ section.alt .scheda { background: var(--carta); }
 }
 .site-footer .griglia { gap: 40px; }
 .site-footer h4 {
-  font-size: .78rem; letter-spacing: .14em; text-transform: uppercase;
+  font-size: .98rem; letter-spacing: .1em; text-transform: uppercase;
   color: var(--pastello-1); margin-bottom: 16px;
 }
 .site-footer ul { list-style: none; margin: 0; padding: 0; }
