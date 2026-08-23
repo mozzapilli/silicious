@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 330" role="img"
+     aria-label="Disegno a inchiostro di un filare di vigna: pali, filo di ferro, tre persone al lavoro e l'ampolla di vetro appoggiata a terra all'estremità del filare">
+  <g fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+
+    <!-- Il filo del filare: una linea sola, tremolante, che tiene insieme tutto -->
+    <path fill="none" stroke-width="2.6"
+          d="M8 176 C150 168 250 184 372 175 C520 164 610 186 742 177 C880 168 980 187 1108 178 C1230 170 1320 184 1394 176"/>
+
+    <!-- La terra -->
+    <path fill="none" stroke-width="2.2" opacity=".55"
+          d="M0 268 C180 262 300 274 470 266 C660 257 820 273 1010 265 C1180 258 1300 270 1400 263"/>
+
+    <!-- Pali: barre nere irregolari, con il piede sfrangiato come un pennello scarico -->
+    <path d="M84 84 L104 80 L108 250 L106 276 L101 262 L98 288 L93 268 L89 282 L86 252 Z"/>
+    <path d="M296 96 L314 92 L317 248 L315 280 L311 264 L307 290 L303 266 L299 278 L297 250 Z"/>
+    <path d="M528 78 L549 74 L552 252 L550 284 L545 266 L541 292 L537 268 L533 280 L530 254 Z"/>
+    <path d="M762 92 L781 88 L784 246 L782 278 L777 262 L774 286 L769 264 L765 276 L763 248 Z"/>
+    <path d="M986 82 L1006 78 L1009 250 L1007 282 L1002 264 L999 290 L994 266 L990 278 L988 252 Z"/>
+    <path d="M1176 98 L1194 94 L1197 244 L1195 274 L1190 258 L1187 284 L1182 262 L1178 274 L1177 246 Z"/>
+
+    <!-- Tralci: pochi segni sopra il filo, come potati da poco -->
+    <g fill="none" stroke-width="2.2" opacity=".8">
+      <path d="M104 168 C130 150 152 158 168 138"/>
+      <path d="M108 172 C86 154 70 160 54 142"/>
+      <path d="M314 170 C338 152 358 160 372 140"/>
+      <path d="M548 166 C572 148 590 156 606 134"/>
+      <path d="M544 170 C524 152 508 158 492 140"/>
+      <path d="M780 168 C804 150 822 158 838 138"/>
+      <path d="M1005 166 C1029 148 1048 156 1064 136"/>
+      <path d="M1001 170 C980 152 964 158 948 140"/>
+    </g>
+
+    <!-- Primo: cammina lungo il filare portando l'ampolla vuota -->
+    <g fill="none" stroke-width="3.6">
+      <circle cx="196" cy="150" r="11.5"/>
+      <path d="M196 162 C193 178 191 194 189 210"/>
+      <path d="M193 174 C182 170 172 166 163 160"/>
+      <path d="M194 180 C206 184 216 190 224 197"/>
+      <path d="M189 210 C183 226 176 240 170 252"/>
+      <path d="M189 210 C197 224 204 236 208 250"/>
+      <circle cx="234" cy="204" r="17"/>
+      <path d="M228 188 L228 180 L241 180 L241 188"/>
+    </g>
+
+    <!-- Secondo: accosciato, lega il tralcio al filo -->
+    <g fill="none" stroke-width="3.6">
+      <circle cx="596" cy="182" r="11"/>
+      <path d="M592 193 C584 205 578 215 574 226"/>
+      <path d="M593 198 C604 190 614 182 624 176"/>
+      <path d="M590 202 C598 196 608 190 618 186"/>
+      <path d="M574 226 C566 236 562 244 562 252"/>
+      <path d="M574 226 C584 236 592 244 596 252"/>
+    </g>
+
+    <!-- Terzo: in piedi verso l'ampolla, un braccio teso -->
+    <g fill="none" stroke-width="3.6">
+      <circle cx="1112" cy="146" r="11.5"/>
+      <path d="M1112 158 C1112 176 1113 194 1114 210"/>
+      <path d="M1112 172 C1124 172 1138 176 1150 184"/>
+      <path d="M1111 176 C1100 182 1092 190 1086 200"/>
+      <path d="M1114 210 C1110 226 1106 240 1104 254"/>
+      <path d="M1114 210 C1122 224 1128 238 1131 252"/>
+    </g>
+
+    <!-- L'ampolla, in fondo al filare -->
+    <g fill="none" stroke-width="4">
+      <circle cx="1300" cy="204" r="56"/>
+      <path d="M1284 152 L1284 122 L1316 122 L1316 152"/>
+      <path d="M1272 121 L1328 121"/>
+      <path d="M1294 118 L1294 96 C1294 90 1306 90 1306 96 L1306 118"/>
+      <path d="M1268 250 L1258 278 M1300 260 L1300 280 M1332 250 L1342 278"/>
+    </g>
+
+    <!-- Il vino dentro: una macchia piena, il solo elemento non lineare -->
+    <path fill="currentColor" stroke="none" opacity=".22"
+          d="M1247 214 C1258 246 1276 260 1300 260 C1324 260 1342 246 1353 214 C1330 224 1270 224 1247 214 Z"/>
+  </g>
+</svg>

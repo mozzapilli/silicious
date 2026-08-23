@@ -17,14 +17,14 @@
   --linea:      #E2DED4;
 
   /* I tre pastelli che si alternano di sezione in sezione */
-  --pastello-1: #FFD9C7;   /* pesca */
-  --pastello-2: #CFE7D6;   /* verde vigna */
-  --pastello-3: #CDDDF3;   /* cielo */
+  --pastello-1: #FFC2A8;   /* pesca */
+  --pastello-2: #ABE3BD;   /* verde vigna */
+  --pastello-3: #ADD0F7;   /* cielo */
   --carta-alt:  var(--pastello-1);
 
   /* Accenti */
-  --vino:  #B02B43;        /* accento primario: bottoni, numeri, sottolineature */
-  --terra: #8E4E23;        /* occhielli e dettagli */
+  --vino:  #9E273C;        /* accento primario: bottoni, numeri, sottolineature */
+  --terra: #804620;        /* occhielli e dettagli */
   --vetro: #2F7D6B;        /* seconda serie nei grafici */
   --oro:   #C99A2E;
 
@@ -43,22 +43,22 @@
 /* ---- Variante "terra": più calda, virata sul cotto e la salvia ---------- */
 :root[data-stile="terra"] {
   --carta:      #FCF8F1;
-  --pastello-1: #F4CDB6;
-  --pastello-2: #DCE5C8;
-  --pastello-3: #F1DFC2;
-  --vino:  #993F2B;
-  --terra: #705630;
+  --pastello-1: #F7BE99;
+  --pastello-2: #D0E3A6;
+  --pastello-3: #F3D69E;
+  --vino:  #8D3A28;
+  --terra: #68502D;
   --vetro: #5F7A46;
 }
 
 /* ---- Variante "fredda": lilla, menta, cielo, accento indaco ------------- */
 :root[data-stile="fredda"] {
   --carta:      #FBFBFE;
-  --pastello-1: #E1D8F5;
-  --pastello-2: #C9EEE4;
-  --pastello-3: #D7E5FA;
+  --pastello-1: #D6C6F7;
+  --pastello-2: #A9EFDA;
+  --pastello-3: #C2DBFA;
   --vino:  #4A3AA8;
-  --terra: #694EAB;
+  --terra: #60479C;
   --vetro: #2E8C86;
 }
 
@@ -140,7 +140,14 @@ section p, .racconto-annata p, .dati dd { max-width: 68ch; }
 }
 .nav a:hover { border-bottom-color: var(--terra); }
 .nav a[aria-current="page"] { border-bottom-color: var(--vino); color: var(--vino); }
-.nav .btn { border: 0; }
+
+/* Il bottone dentro il menu è pur sempre una ".nav a": senza queste righe
+   eredita il colore scuro del testo di navigazione e diventa nero su nero. */
+.nav a.btn,
+.nav a.btn[aria-current="page"] {
+  color: var(--carta); border: 1.5px solid var(--inchiostro); border-bottom-color: var(--inchiostro);
+}
+.nav a.btn:hover { color: #fff; border-color: var(--vino); }
 
 .menu-toggle {
   display: none; margin-left: auto;
@@ -309,6 +316,11 @@ section.alt .scheda { background: var(--carta); }
   font-size: .86rem; line-height: 1.55; color: var(--inchiostro-lieve);
   margin-top: 12px; padding-left: 14px; border-left: 2px solid var(--terra);
 }
+
+/* Fascia con il disegno a inchiostro: prende il colore del testo, quindi
+   segue la palette senza doverlo ridisegnare. */
+.banda-disegno { padding-block: clamp(24px, 4vw, 56px) clamp(48px, 7vw, 96px); }
+.banda-disegno img { width: 100%; max-width: 1100px; margin-inline: auto; }
 
 .banda-immagine { padding-block: 0; }
 .banda-immagine img {
