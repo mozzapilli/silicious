@@ -2,12 +2,13 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
  "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
 <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
- viewBox="165 45 690 575"
+ viewBox="120 5 780 660"
  preserveAspectRatio="xMidYMid meet">
 <metadata>
 Created by potrace 1.16, written by Peter Selinger 2001-2019
 </metadata>
-<g transform="translate(0.000000,1024.000000) scale(0.100000,-0.100000)"
+<defs><clipPath id="soloAmpolla"><rect x="0" y="4040" width="10240" height="6200"/></clipPath></defs>
+<g transform="translate(0.000000,1024.000000) scale(0.100000,-0.100000)" clip-path="url(#soloAmpolla)"
 fill="currentColor" stroke="none">
 <path d="M0 5120 z m5310 4516 c47 -3 137 -8 200 -11 144 -7 212 -20 272 -52 73 -39 80
 -62 79 -261 -2 -323 -25 -712 -51 -852 -26 -141 -1 -306 60 -405 34 -56 114
@@ -201,7 +202,6 @@ m982 -25 c120 -62 159 -103 221 -231 44 -90 -10 -202 -96 -202 -22 0 -49 3
 56 1 100 40 57 51 108 147 121 228 5 32 16 77 24 100 25 72 37 168 37 288 0
 106 -3 125 -36 225 -27 83 -44 118 -71 145 -61 64 -135 85 -182 53z"/>
 <!-- Il picciolo dell.acino: parte dentro la O e sale piegando a destra. -->
-<path fill="none" stroke="currentColor" stroke-width="170" stroke-linecap="round"
-      d="M6300 3520 C6280 3660 6215 3800 6140 3930"/>
+<path d="M6320 3555 C6330 3660 6353 3700 6365 3760 C6373 3820 6365 3880 6380 3935 L6455 3962 L6513 3930 C6521 3870 6509 3810 6521 3750 C6533 3690 6557 3650 6565 3560 Z"/>
 </g>
 </svg>
