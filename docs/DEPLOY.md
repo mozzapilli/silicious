@@ -28,13 +28,13 @@ Dopo un minuto il sito è online su
 `https://mozzapilli.github.io/silicious/`
 
 > Nota: sul dominio personalizzato tutti gli indirizzi diventano più corti
-> (`silicious.org/messaggi/` invece di `mozzapilli.github.io/silicious/messaggi/`).
+> (`silicious.it/messaggi/` invece di `mozzapilli.github.io/silicious/messaggi/`).
 > I link interni sono relativi, quindi continuano a funzionare in entrambi i casi.
 
-## 3. Dominio silicious.org
+## 3. Dominio silicious.it
 
-Sono stati scelti due domini: **silicious.org** come indirizzo ufficiale e
-**silicious.it** che rimanda al primo.
+Sono stati registrati due domini: **silicious.it** è l'indirizzo ufficiale — lo
+stesso della casella `info@silicious.it` — e **silicious.org** rimanda al primo.
 
 ### a) Nel repository
 
@@ -42,7 +42,7 @@ Crea un file chiamato `CNAME` (senza estensione) nella cartella principale, con
 dentro una sola riga:
 
 ```
-silicious.org
+silicious.it
 ```
 
 Poi `git add CNAME`, `git commit`, `git push`.
@@ -52,7 +52,7 @@ Poi `git add CNAME`, `git commit`, `git push`.
 
 ### b) Dal pannello di chi ti ha venduto il dominio
 
-Per `silicious.org` crea questi record:
+Per `silicious.it` crea questi record:
 
 | Tipo  | Nome  | Valore                |
 |-------|-------|-----------------------|
@@ -62,20 +62,24 @@ Per `silicious.org` crea questi record:
 | A     | `@`   | `185.199.111.153`     |
 | CNAME | `www` | `mozzapilli.github.io.` |
 
-Per `silicious.it`, invece, imposta un **redirect permanente (301)** verso
-`https://silicious.org` — quasi tutti i registrar offrono questa funzione senza costi.
+Per `silicious.org`, invece, imposta un **redirect permanente (301)** verso
+`https://silicious.it`: nel pannello Aruba è il servizio di redirezione del dominio,
+gratuito e senza effetti sulla posta.
+
+> ⚠️ Nel pannello DNS modifica **solo** il record A e il CNAME del `www`. I record
+> MX e TXT sono la posta e l'SPF: cancellarli spegne `info@silicious.it` senza
+> che te ne accorga subito.
 
 ### c) Ultimo passaggio
 
-Su GitHub → Settings → Pages: inserisci `silicious.org` in *Custom domain*,
+Su GitHub → Settings → Pages: inserisci `silicious.it` in *Custom domain*,
 attendi la verifica e spunta **Enforce HTTPS**. Il certificato viene emesso
 gratuitamente da GitHub, può richiedere qualche ora.
 
-## 4. Da correggere nei documenti dell'Associazione
+## 4. Coerenza con i documenti dell'Associazione
 
 Il regolamento operativo (Art. 5) e la roadmap indicano **silicious.it** come sito
-ufficiale. Se l'indirizzo ufficiale diventa `silicious.org`, quei documenti vanno
-allineati prima del deposito definitivo.
+ufficiale: coincide con la scelta fatta, quindi non c'è nulla da correggere.
 
 ## 5. Moduli: dalla posta elettronica a un servizio di invio
 

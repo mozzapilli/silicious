@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://silicious.org/sitemap.xml
+Sitemap: https://silicious.it/sitemap.xml
