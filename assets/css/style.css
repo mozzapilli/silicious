@@ -233,6 +233,36 @@ section.alt .scheda { background: var(--carta); }
 }
 .conto small { font-family: var(--sans); font-size: .8rem; color: var(--inchiostro-lieve); letter-spacing: .06em; text-transform: uppercase; display: block; margin-top: 4px; }
 
+/* ------------------------------ Immagini -------------------------------- */
+
+.figura { margin: 0; }
+.figura img {
+  width: 100%; border-radius: var(--radius);
+  background: var(--carta-alt); border: 1px solid var(--linea);
+}
+.figura figcaption {
+  font-size: .86rem; line-height: 1.55; color: var(--inchiostro-lieve);
+  margin-top: 12px; padding-left: 14px; border-left: 2px solid var(--terra);
+}
+
+.banda-immagine { padding-block: 0; }
+.banda-immagine img {
+  width: 100%; height: clamp(280px, 52vh, 560px); object-fit: cover;
+  border-block: 1px solid var(--linea);
+}
+
+.galleria { display: grid; gap: 32px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+.galleria .figura img { aspect-ratio: 3 / 4; object-fit: cover; }
+.galleria .figura.orizzontale img { aspect-ratio: 4 / 3; }
+
+/* Schede con fotografia di copertina */
+.scheda.con-foto { padding: 0; overflow: hidden; }
+.scheda.con-foto .copertina {
+  width: 100%; aspect-ratio: 4 / 3; object-fit: cover;
+  border-bottom: 1px solid var(--linea); background: var(--carta-alt);
+}
+.scheda.con-foto .corpo { padding: 26px 28px 28px; display: flex; flex-direction: column; flex: 1; }
+
 /* --------------------------- Tabelle tecniche --------------------------- */
 
 .dati { border-top: 1px solid var(--inchiostro); margin-top: 8px; }

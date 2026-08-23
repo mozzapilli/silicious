@@ -97,7 +97,15 @@ casella di spunta di consenso nel modulo.
 
 - [ ] Casella e-mail ufficiale su dominio proprio (es. `info@silicious.org`)
 - [ ] Codice fiscale, sede legale, estremi RUNTS e IBAN in `data/contenuti.js`
-- [ ] Fotografie della vigna, della cantina e dell'ampolla
+- [x] Fotografie della vigna, della cantina e dell'ampolla (13 dicembre 2025)
 - [ ] Pagina Informativa privacy e Cookie policy
 - [ ] Profili Instagram/Facebook da collegare nel footer
 - [ ] Immagine di anteprima social dedicata (1200×630 px)
+
+### Nota sulle fotografie
+
+Le immagini in `assets/img/messaggio-01/` sono state ridimensionate e ricompresse
+a partire dagli originali: nel farlo sono stati **rimossi i metadati EXIF**, quindi
+le coordinate GPS della vigna e della cantina non sono pubbliche. Se in futuro
+carichi altre foto, ridimensionale sempre prima di pubblicarle: oltre al peso, un
+JPEG dritto dal telefono porta con sé la posizione esatta in cui è stato scattato.

@@ -67,6 +67,9 @@ window.SILICIOUS = {
      stato:  "ampolla"   = vino in affinamento nell'ampolla di vetro
              "bottiglia" = imbottigliato, magnum in riposo
              "concluso"  = evento "Il Tempo Restituito" celebrato
+
+     magnum: totale prodotto. magnumAzienda: quante restano alla cantina
+     ospitante. magnumAsta: quante vengono battute all'asta benefica.
      ====================================================================== */
   messaggi: [
     {
@@ -82,8 +85,17 @@ window.SILICIOUS = {
       annata: 2025,
       vitigno: "Sangiovese in purezza",
       ettari: 0.9,
-      magnum: 40,               // numero di magnum previste o effettive
       stato: "ampolla",
+
+      /* Magnum: totali previste (o effettive dopo l'imbottigliamento),
+         quante restano all'azienda ospitante e quante vanno all'asta. */
+      magnum: 39,
+      magnumAzienda: 1,
+      magnumAsta: 38,
+
+      /* Fotografia usata nelle schede dell'archivio. */
+      copertina: "assets/img/messaggio-01/ampolla-piena.jpg",
+      copertinaAlt: "L'ampolla di vetro da 60 litri piena di vino, nella cantina di Fattoria Ispoli",
 
       date: {
         riempimento: "2025-12-13",        // giorno in cui l'ampolla è stata riempita

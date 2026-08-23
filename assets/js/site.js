@@ -120,12 +120,17 @@
   function renderKpi(nodo) {
     var messaggi = D.messaggi || [];
     var k = D.kpi || {};
-    var magnum = messaggi.reduce(function (s, m) { return s + (m.magnum || 0); }, 0);
+    /* In custodia all'Associazione: il totale meno quelle che restano alla cantina. */
+    var magnum = messaggi.reduce(function (s, m) {
+      return s + ((m.magnum || 0) - (m.magnumAzienda || 0));
+    }, 0);
+    var asta = messaggi.reduce(function (s, m) { return s + (m.magnumAsta || 0); }, 0);
     var quali = (nodo.getAttribute("data-kpi") || "messaggi,magnum,soci,fondi").split(",");
 
     var voci = {
       messaggi:  { valore: numero(messaggi.length), etichetta: "Messaggi avviati" },
       magnum:    { valore: numero(magnum),          etichetta: "Magnum in custodia" },
+      asta:      { valore: numero(asta),            etichetta: "Magnum destinate all'asta" },
       soci:      { valore: numero(k.soci),          etichetta: "Soci dell'Associazione" },
       fondi:     { valore: euro(k.fondiRaccolti),   etichetta: "Fondi raccolti" },
       erogati:   { valore: euro(k.fondiErogati),    etichetta: "Fondi erogati" },
@@ -184,12 +189,19 @@
     }
     nodo.innerHTML = messaggi.map(function (m) {
       var f = faseCorrente(m);
-      return '<a class="scheda scheda-link" href="' + esc(base + m.pagina) + '">' +
-          '<span class="meta">Messaggio n°' + esc(m.numero) + " · " + esc(m.annata) + "</span>" +
-          "<h3>" + esc(m.titolo) + "</h3>" +
-          "<p><strong>" + esc(m.azienda) + "</strong><br>" + esc(m.luogo) + "</p>" +
-          "<p>" + esc(m.denominazione) + " · " + esc(m.vitigno) + "</p>" +
-          '<div class="piede"><span class="fase ' + f.classe + '">' + esc(f.etichetta) + "</span></div>" +
+      var foto = m.copertina
+        ? '<img class="copertina" src="' + esc(base + m.copertina) + '" alt="' +
+          esc(m.copertinaAlt || "") + '" loading="lazy" width="800" height="600">'
+        : "";
+      return '<a class="scheda scheda-link' + (foto ? " con-foto" : "") +
+          '" href="' + esc(base + m.pagina) + '">' + foto +
+          '<div class="corpo">' +
+            '<span class="meta">Messaggio n°' + esc(m.numero) + " · " + esc(m.annata) + "</span>" +
+            "<h3>" + esc(m.titolo) + "</h3>" +
+            "<p><strong>" + esc(m.azienda) + "</strong><br>" + esc(m.luogo) + "</p>" +
+            "<p>" + esc(m.denominazione) + " · " + esc(m.vitigno) + "</p>" +
+            '<div class="piede"><span class="fase ' + f.classe + '">' + esc(f.etichetta) + "</span></div>" +
+          "</div>" +
         "</a>";
     }).join("");
   }

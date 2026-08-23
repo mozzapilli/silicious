@@ -67,10 +67,34 @@ date: {
   evento: "2029-11-15",
   eventoStimato: true
 },
-magnum: 38,                            // il numero effettivo di magnum ottenute
+magnum: 37,            // quante ne sono uscite davvero
+magnumAzienda: 1,      // quante restano alla cantina ospitante
+magnumAsta: 36,        // quante vanno all'asta
 ```
 
 Il sito passa automaticamente a mostrare il conto alla rovescia verso l'evento.
+
+Il KPI «Magnum in custodia» è calcolato come `magnum − magnumAzienda`: quelle
+effettivamente conservate dall'Associazione. Non va scritto a mano.
+
+---
+
+## Cambiare la fotografia di un Messaggio
+
+Ogni Messaggio ha una foto di copertina, quella che compare nelle schede
+dell'archivio:
+
+```js
+copertina: "assets/img/messaggio-01/ampolla-piena.jpg",
+copertinaAlt: "Descrizione della foto per chi non la può vedere",
+```
+
+Le foto vanno messe in `assets/img/messaggio-01/` (una cartella per Messaggio).
+**Ridimensionale prima di caricarle**: massimo 1400 pixel di lato lungo e qualità
+80. Una foto da telefono pesa 5-8 MB e renderebbe il sito lentissimo.
+
+Il campo `copertinaAlt` non è un dettaglio: è quello che leggono i non vedenti e
+i motori di ricerca. Descrivi che cosa si vede, non «foto ampolla».
 
 ---
 
