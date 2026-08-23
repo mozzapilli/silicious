@@ -186,6 +186,23 @@ section.alt:nth-of-type(3n)   { background: var(--fondo-3); }
 /* L'apertura è centrata: il marchio disegnato sta al centro della pagina e
    tutto quello che segue si allinea a lui. */
 .hero { padding-block: clamp(40px, 5vw, 72px) clamp(48px, 7vw, 96px); text-align: center; }
+/* Il marchio dell'apertura: il disegno sopra, il nome composto sotto nel
+   carattere del sito. Sono due pezzi separati apposta — quando arriverà il
+   disegno nuovo dal grafico si sostituisce solo l'immagine. */
+.marchio-grande {
+  display: flex; flex-direction: column; align-items: center;
+  gap: clamp(14px, 1.8vw, 24px);
+  margin: 0 auto clamp(28px, 4vw, 48px);
+  color: var(--inchiostro);
+}
+.marchio-grande img { width: min(190px, 42vw); }
+.marchio-grande .parola {
+  font-size: clamp(2.3rem, 5.4vw, 4rem);
+  font-weight: 500;
+  letter-spacing: -0.045em;
+  line-height: 1;
+}
+
 .hero .logo-grande {
   width: min(250px, 54vw); margin: 0 auto clamp(28px, 4vw, 48px); color: var(--inchiostro);
 }

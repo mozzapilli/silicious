@@ -97,8 +97,8 @@ window.SILICIOUS = {
       magnumAsta: 38,
 
       /* Fotografia usata nelle schede dell'archivio. */
-      copertina: "assets/img/messaggio-01/ampolla-piena.jpg",
-      copertinaAlt: "L'ampolla di vetro da 60 litri piena di vino, nella cantina di Fattoria Ispoli",
+      copertina: "assets/img/messaggio-01/ampolla-airlock.jpg",
+      copertinaAlt: "L'ampolla coperta di nero con il gorgogliatore montato sul coperchio d'acciaio",
 
       /* Colore del vino nel disegno dell'ampolla: l'unico colore di tutto il
          sito, ed è voluto — lì il colore è un dato, non una decorazione.
