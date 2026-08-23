@@ -33,6 +33,7 @@
   --titoli: var(--testo);
   --serif:  var(--testo);   /* retrocompatibilità: nessun secondo carattere */
   --sans:   var(--testo);
+  --mono:   "Fragment Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
   /* Misure */
   --container: 1240px;
@@ -40,8 +41,19 @@
   --radius: 4px;
 }
 
-/* La palette è stata scelta: pesca, verde vigna e cielo su carta calda,
-   con il rosso vino come accento. Le varianti di prova sono state rimosse. */
+/* ---- Prova temporanea: versione monocromatica, per il confronto -------
+   Si attiva con ?stile=mono. Quando la scelta sarà fatta, resta una sola
+   palette e questo blocco sparisce. */
+:root[data-stile="mono"] {
+  --carta:      #FAF8F4;
+  --pastello-1: #EDEAE3;
+  --pastello-2: #E2DED5;
+  --pastello-3: #F2EFE9;
+  --vino:  #17161A;
+  --terra: #55514A;
+  --vetro: #3E3A34;
+}
+
 
 *, *::before, *::after { box-sizing: border-box; }
 
@@ -517,3 +529,27 @@ section.alt .scheda { background: var(--carta); }
   html { scroll-behavior: auto; }
   * { transition: none !important; animation: none !important; }
 }
+
+/* ---------------------- Etichette in monospaziato ------------------------
+   Il testo resta tutto nello stesso carattere. Passano al monospaziato solo
+   le etichette: occhielli, voci delle schede tecniche, unità dei numeri,
+   date, legende. È il dettaglio che dà il tono da catalogo ai siti presi a
+   riferimento, e distingue a colpo d'occhio il dato dal discorso.
+   -------------------------------------------------------------------------- */
+
+.occhiello, .tagline,
+.scheda .meta, .kpi .etichetta, .indice .etichetta, .indice .scarto,
+.dati dt, .dati .voce, .tempo .fase, .ampolla-fase,
+.campo label, .site-footer h4, .conto small,
+.barra-estremi, .legenda-grafico, .site-footer .coda,
+.grafico .tacca, .grafico .etichetta-x {
+  font-family: var(--mono);
+  font-weight: 400;
+  letter-spacing: .02em;
+}
+
+/* Il monospaziato ha già la sua aria: la spaziatura extra va ridotta,
+   altrimenti le maiuscole si sfilacciano. */
+.occhiello { letter-spacing: .05em; }
+.tagline   { letter-spacing: .1em; }
+.kpi .etichetta, .indice .etichetta, .dati dt, .site-footer h4 { letter-spacing: .03em; }

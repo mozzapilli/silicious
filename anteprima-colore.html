@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Confronto colore — Silicious</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="assets/img/logo-mark.svg?v=3" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fragment+Mono&family=Schibsted+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* Questa pagina è uno strumento di lavoro, non fa parte del sito.
+     Serve solo a mettere le due versioni una accanto all'altra. */
+  :root { --ink: #15141A; --carta: #FDFBF6; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--carta); color: var(--ink);
+    font-family: "Schibsted Grotesk", system-ui, sans-serif;
+  }
+  header {
+    padding: 28px clamp(20px, 4vw, 48px) 22px;
+    border-bottom: 1px solid #E2DED4;
+  }
+  h1 { font-size: clamp(1.6rem, 3vw, 2.4rem); margin: 0 0 .3em; letter-spacing: -0.03em; font-weight: 500; }
+  p  { margin: 0; max-width: 70ch; color: #56535E; font-size: .98rem; line-height: 1.55; }
+  .mono { font-family: "Fragment Mono", monospace; font-size: .85rem; letter-spacing: .03em; }
+
+  .confronto { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: #E2DED4; }
+  @media (max-width: 900px) { .confronto { grid-template-columns: 1fr; } }
+
+  .colonna { background: var(--carta); display: flex; flex-direction: column; min-width: 0; }
+  .etichetta {
+    padding: 14px 18px; display: flex; gap: 12px; align-items: baseline;
+    border-bottom: 1px solid #E2DED4; position: sticky; top: 0; background: var(--carta); z-index: 2;
+  }
+  .etichetta b { font-size: 1.05rem; font-weight: 600; letter-spacing: -0.02em; }
+  .etichetta a { margin-left: auto; color: #9E273C; font-size: .88rem; }
+
+  /* L'anteprima è larga 1400 px e poi rimpicciolita: così si vede
+     l'impaginazione da schermo grande, non quella da telefono. */
+  .telaio { position: relative; overflow: hidden; height: 78vh; }
+  .telaio iframe {
+    width: 1400px; height: calc(78vh / var(--z)); border: 0;
+    transform: scale(var(--z)); transform-origin: 0 0;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="mono">STRUMENTO DI LAVORO — NON FA PARTE DEL SITO</p>
+  <h1>Le due versioni, una accanto all'altra</h1>
+  <p>A sinistra la versione a colori che c'è adesso. A destra la stessa pagina in
+    bianco e nero, come i riferimenti che mi hai mandato. Le due anteprime sono la
+    home vera, rimpicciolita: si scorrono e si cliccano. Per vederne una a schermo
+    intero usa il collegamento sopra ciascuna.</p>
+</header>
+
+<div class="confronto">
+  <div class="colonna">
+    <div class="etichetta">
+      <b>A colori</b>
+      <span class="mono">pesca · verde vigna · cielo</span>
+      <a href="index.html?stile=pastello" target="_blank" rel="noopener">apri intera →</a>
+    </div>
+    <div class="telaio" style="--z:.5">
+      <iframe src="index.html?stile=pastello" title="Home a colori" loading="lazy"></iframe>
+    </div>
+  </div>
+
+  <div class="colonna">
+    <div class="etichetta">
+      <b>Bianco e nero</b>
+      <span class="mono">carta · grigi · inchiostro</span>
+      <a href="index.html?stile=mono" target="_blank" rel="noopener">apri intera →</a>
+    </div>
+    <div class="telaio" style="--z:.5">
+      <iframe src="index.html?stile=mono" title="Home in bianco e nero" loading="lazy"></iframe>
+    </div>
+  </div>
+</div>
+
+<script>
+/* Gli iframe scrivono la scelta in localStorage, che è condiviso: senza questo
+   la seconda anteprima sovrascriverebbe la prima. Qui la ripristino a ogni
+   caricamento, così le due colonne restano diverse. */
+document.querySelectorAll('.telaio iframe').forEach(function (f) {
+  f.addEventListener('load', function () {
+    try {
+      var stile = f.src.indexOf('mono') !== -1 ? 'mono' : 'pastello';
+      var doc = f.contentDocument;
+      if (stile === 'mono') doc.documentElement.setAttribute('data-stile', 'mono');
+      else doc.documentElement.removeAttribute('data-stile');
+    } catch (e) { /* origine diversa: non succede, siamo sullo stesso dominio */ }
+  });
+});
+</script>
+
+</body>
+</html>
