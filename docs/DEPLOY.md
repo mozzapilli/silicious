@@ -27,9 +27,9 @@ Su GitHub: repository **silicious** → **Settings** → **Pages**
 Dopo un minuto il sito è online su
 `https://mozzapilli.github.io/silicious/`
 
-> Nota: finché il sito sta in questo indirizzo, i link della pagina 404 non
-> funzionano (usano percorsi assoluti). Si sistemano da soli quando il dominio
-> personalizzato è attivo.
+> Nota: sul dominio personalizzato tutti gli indirizzi diventano più corti
+> (`silicious.org/messaggi/` invece di `mozzapilli.github.io/silicious/messaggi/`).
+> I link interni sono relativi, quindi continuano a funzionare in entrambi i casi.
 
 ## 3. Dominio silicious.org
 

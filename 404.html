@@ -5,26 +5,47 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Pagina non trovata — Silicious</title>
 <meta name="robots" content="noindex">
-<link rel="icon" href="/assets/img/logo-mark.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/style.css">
+<script>
+/* Questa pagina viene servita per qualsiasi indirizzo sbagliato, a qualsiasi
+   profondità: i percorsi vanno quindi calcolati, non scritti a mano.
+   Su mozzapilli.github.io/silicious/ la base è /silicious/, sul dominio è / */
+(function () {
+  var base = location.hostname.indexOf("github.io") !== -1
+    ? "/" + location.pathname.split("/")[1] + "/"
+    : "/";
+  document.write(
+    '<link rel="stylesheet" href="' + base + 'assets/css/style.css">' +
+    '<link rel="icon" type="image/svg+xml" href="' + base + 'assets/img/logo-mark.svg">'
+  );
+  window.__base = base;
+})();
+</script>
 </head>
 <body>
 <main>
   <section class="hero">
     <div class="container">
-      <img class="logo-grande" src="/assets/img/logo-mark.svg" alt="Silicious" width="180" height="180" style="width:min(180px,40vw)">
+      <img class="logo-grande" id="logo404" alt="Silicious" width="180" height="180" style="width:min(180px,40vw)">
       <p class="tagline">Errore 404</p>
       <h1>Questa pagina non esiste</h1>
       <p class="sottotitolo">Forse è ancora in affinamento. Torna al progetto e riprova da lì.</p>
       <div class="btn-riga">
-        <a class="btn" href="/">Torna alla home</a>
-        <a class="btn btn-ghost" href="/messaggi/">I Messaggi</a>
+        <a class="btn" id="link-home" href="/">Torna alla home</a>
+        <a class="btn btn-ghost" id="link-messaggi" href="/messaggi/">I Messaggi</a>
       </div>
     </div>
   </section>
 </main>
+<script>
+(function () {
+  var base = window.__base || "/";
+  document.getElementById("logo404").src = base + "assets/img/logo-mark.svg";
+  document.getElementById("link-home").href = base;
+  document.getElementById("link-messaggi").href = base + "messaggi/";
+})();
+</script>
 </body>
 </html>
