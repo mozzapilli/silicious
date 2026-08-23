@@ -11,22 +11,21 @@
 
 :root {
   /* Fondo e inchiostro */
-  --carta:      #FDFBF6;
+  --carta:      #FAF8F4;
   --inchiostro: #15141A;
   --inchiostro-lieve: #56535E;
-  --linea:      #E2DED4;
+  --linea:      #DEDAD1;
 
-  /* I tre pastelli che si alternano di sezione in sezione */
-  --pastello-1: #FFC2A8;   /* pesca */
-  --pastello-2: #ABE3BD;   /* verde vigna */
-  --pastello-3: #ADD0F7;   /* cielo */
-  --carta-alt:  var(--pastello-1);
+  /* I tre fondi che si alternano di sezione in sezione */
+  --fondo-1: #EDEAE3;
+  --fondo-2: #E2DED5;
+  --fondo-3: #F2EFE9;
+  --carta-alt: var(--fondo-1);
 
-  /* Accenti */
-  --vino:  #9E273C;        /* accento primario: bottoni, numeri, sottolineature */
-  --terra: #804620;        /* occhielli e dettagli */
-  --vetro: #2F7D6B;        /* seconda serie nei grafici */
-  --oro:   #C99A2E;
+  /* Accenti: nel bianco e nero non sono colori ma valori di grigio */
+  --accento:   #17161A;   /* numeri grandi, collegamenti, bottoni */
+  --etichetta: #55514A;   /* occhielli e voci in monospaziato */
+  --accento-2: #615B53;   /* etichette di stato e seconda serie nei grafici */
 
   /* Tipografia — un solo carattere, due ruoli */
   --testo:  "Schibsted Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -41,18 +40,6 @@
   --radius: 4px;
 }
 
-/* ---- Prova temporanea: versione monocromatica, per il confronto -------
-   Si attiva con ?stile=mono. Quando la scelta sarà fatta, resta una sola
-   palette e questo blocco sparisce. */
-:root[data-stile="mono"] {
-  --carta:      #FAF8F4;
-  --pastello-1: #EDEAE3;
-  --pastello-2: #E2DED5;
-  --pastello-3: #F2EFE9;
-  --vino:  #17161A;
-  --terra: #55514A;
-  --vetro: #3E3A34;
-}
 
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -72,7 +59,7 @@ body {
 
 img, svg { max-width: 100%; height: auto; display: block; }
 
-a { color: var(--vino); text-underline-offset: 4px; text-decoration-thickness: 1.5px; }
+a { color: var(--accento); text-underline-offset: 4px; text-decoration-thickness: 1.5px; }
 a:hover { color: var(--inchiostro); }
 
 h1, h2, h3, h4 {
@@ -100,7 +87,7 @@ section p, .racconto-annata p, .dati dd { max-width: 68ch; }
   font-weight: 600;
   letter-spacing: .1em;
   text-transform: uppercase;
-  color: var(--terra);
+  color: var(--etichetta);
   margin: 0 0 1.4em;
 }
 
@@ -131,8 +118,8 @@ section p, .racconto-annata p, .dati dd { max-width: 68ch; }
   font-size: .95rem; font-weight: 500;
   padding: 6px 0; border-bottom: 1.5px solid transparent;
 }
-.nav a:hover { border-bottom-color: var(--terra); }
-.nav a[aria-current="page"] { border-bottom-color: var(--vino); color: var(--vino); }
+.nav a:hover { border-bottom-color: var(--etichetta); }
+.nav a[aria-current="page"] { border-bottom-color: var(--accento); color: var(--accento); }
 
 /* Il bottone dentro il menu è pur sempre una ".nav a": senza queste righe
    eredita il colore scuro del testo di navigazione e diventa nero su nero. */
@@ -140,7 +127,7 @@ section p, .racconto-annata p, .dati dd { max-width: 68ch; }
 .nav a.btn[aria-current="page"] {
   color: var(--carta); border: 1.5px solid var(--inchiostro); border-bottom-color: var(--inchiostro);
 }
-.nav a.btn:hover { color: #fff; border-color: var(--vino); }
+.nav a.btn:hover { color: #fff; border-color: var(--accento); }
 
 .menu-toggle {
   display: none; margin-left: auto;
@@ -168,7 +155,7 @@ section p, .racconto-annata p, .dati dd { max-width: 68ch; }
   text-decoration: none; border: 1.5px solid var(--inchiostro); cursor: pointer;
   transition: background .15s ease, color .15s ease, border-color .15s ease;
 }
-.btn:hover { background: var(--vino); border-color: var(--vino); color: #fff; }
+.btn:hover { background: var(--accento); border-color: var(--accento); color: #fff; }
 .btn-ghost { background: transparent; color: var(--inchiostro); }
 .btn-ghost:hover { background: var(--inchiostro); border-color: var(--inchiostro); color: var(--carta); }
 .btn-riga { display: flex; flex-wrap: wrap; gap: 14px; margin-top: clamp(32px, 4vw, 48px); }
@@ -183,9 +170,9 @@ section.bordo-sopra { border-top: 1px solid var(--linea); }
 
 /* I pastelli si alternano da soli lungo la pagina: nessuna classe da scegliere
    a mano, basta marcare la sezione come "alt". */
-section.alt:nth-of-type(3n+1) { background: var(--pastello-1); }
-section.alt:nth-of-type(3n+2) { background: var(--pastello-2); }
-section.alt:nth-of-type(3n)   { background: var(--pastello-3); }
+section.alt:nth-of-type(3n+1) { background: var(--fondo-1); }
+section.alt:nth-of-type(3n+2) { background: var(--fondo-2); }
+section.alt:nth-of-type(3n)   { background: var(--fondo-3); }
 
 /* Il titolo va tenuto corto perché è grande; il paragrafo sotto no, altrimenti
    verrebbe strozzato su tre parole per riga. */
@@ -218,7 +205,7 @@ section.alt:nth-of-type(3n)   { background: var(--pastello-3); }
 
 .tagline {
   font-size: clamp(1.05rem, 1.7vw, 1.45rem); font-weight: 600;
-  letter-spacing: .2em; text-transform: uppercase; color: var(--terra);
+  letter-spacing: .2em; text-transform: uppercase; color: var(--etichetta);
   margin: 0 0 clamp(20px, 3vw, 34px);
 }
 
@@ -240,7 +227,7 @@ section.alt:nth-of-type(3n)   { background: var(--pastello-3); }
   font-size: 1.08rem; letter-spacing: .05em; text-transform: uppercase;
   color: var(--inchiostro-lieve); font-weight: 600;
 }
-.kpi .nota { font-size: .8rem; color: var(--terra); margin-top: 6px; }
+.kpi .nota { font-size: .8rem; color: var(--etichetta); margin-top: 6px; }
 
 /* ------------------------------- Schede --------------------------------- */
 
@@ -256,7 +243,7 @@ section.alt .scheda { background: var(--carta); }
 .scheda p { font-size: .98rem; }
 .scheda .meta {
   font-size: 1rem; letter-spacing: .1em; text-transform: uppercase;
-  color: var(--terra); margin-bottom: 16px; font-weight: 600;
+  color: var(--etichetta); margin-bottom: 16px; font-weight: 600;
 }
 .scheda-link { text-decoration: none; color: inherit; transition: transform .2s ease; }
 .scheda-link:hover { transform: translateY(-4px); }
@@ -265,7 +252,7 @@ section.alt .scheda { background: var(--carta); }
 /* Passi del ciclo */
 .passo { position: relative; padding-top: 24px; border-top: 2px solid var(--inchiostro); }
 .passo .num {
-  font-size: .95rem; font-weight: 600; color: var(--terra);
+  font-size: .95rem; font-weight: 600; color: var(--etichetta);
   display: block; margin-bottom: 14px; letter-spacing: .08em;
 }
 .passo h3 { font-size: clamp(1.4rem, 2.2vw, 1.9rem); margin-bottom: .5em; }
@@ -281,13 +268,13 @@ section.alt .scheda { background: var(--carta); }
   font-size: .9rem; letter-spacing: .08em; text-transform: uppercase; font-weight: 600;
   padding: 3px 9px; border-radius: 999px; border: 1px solid var(--linea); color: var(--inchiostro-lieve);
 }
-.tempo .fase.ampolla   { border-color: var(--vetro); color: var(--vetro); }
-.tempo .fase.bottiglia { border-color: var(--vino);  color: var(--vino); }
-.tempo .fase.conclusa  { border-color: var(--terra); color: var(--terra); }
+.tempo .fase.ampolla   { border-color: var(--accento-2); color: var(--accento-2); }
+.tempo .fase.bottiglia { border-color: var(--accento);  color: var(--accento); }
+.tempo .fase.conclusa  { border-color: var(--etichetta); color: var(--etichetta); }
 .tempo .sottotesto { color: var(--inchiostro-lieve); font-size: .92rem; margin-bottom: 18px; }
 
 .barra { height: 10px; background: rgba(21, 20, 26, .09); border: 1px solid var(--linea); border-radius: 999px; overflow: hidden; }
-.barra > i { display: block; height: 100%; background: var(--vino); border-radius: 999px; transition: width .6s ease; }
+.barra > i { display: block; height: 100%; background: var(--accento); border-radius: 999px; transition: width .6s ease; }
 .barra-estremi {
   display: flex; justify-content: space-between; gap: 12px;
   font-size: .78rem; color: var(--inchiostro-lieve); margin-top: 8px;
@@ -307,7 +294,7 @@ section.alt .scheda { background: var(--carta); }
 }
 .figura figcaption {
   font-size: .86rem; line-height: 1.55; color: var(--inchiostro-lieve);
-  margin-top: 12px; padding-left: 14px; border-left: 2px solid var(--terra);
+  margin-top: 12px; padding-left: 14px; border-left: 2px solid var(--etichetta);
 }
 
 .banda-immagine { padding-block: 0; }
@@ -351,11 +338,11 @@ section.alt .scheda { background: var(--carta); }
 .ampolla-legenda { display: flex; flex-direction: column; gap: 8px; min-width: 210px; }
 .ampolla-percento {
   font-size: clamp(3rem, 7vw, 4.4rem); font-weight: 500; letter-spacing: -0.045em; line-height: .95;
-  color: var(--vino);
+  color: var(--accento);
 }
 .ampolla-fase {
   font-size: .98rem; letter-spacing: .08em; text-transform: uppercase;
-  color: var(--terra); font-weight: 600;
+  color: var(--etichetta); font-weight: 600;
 }
 .ampolla-manca { color: var(--inchiostro-lieve); font-size: .95rem; }
 
@@ -397,9 +384,9 @@ section.alt .scheda { background: var(--carta); }
   font-size: 1.05rem; letter-spacing: .05em; text-transform: uppercase;
   font-weight: 600; color: var(--inchiostro-lieve);
 }
-.indice .scarto { font-size: .88rem; color: var(--terra); }
-.indice .scarto.su  { color: var(--vino); }
-.indice .scarto.giu { color: var(--vetro); }
+.indice .scarto { font-size: .88rem; color: var(--etichetta); }
+.indice .scarto.su  { color: var(--accento); }
+.indice .scarto.giu { color: var(--accento-2); }
 
 /* --------------------------- Grafico dell'annata ------------------------ */
 
@@ -407,16 +394,18 @@ section.alt .scheda { background: var(--carta); }
    illeggibili — ma scorre in orizzontale dentro il suo contenitore. */
 .grafico { margin: 0 0 44px; overflow-x: auto; padding-block: 8px; }
 .grafico svg { width: 100%; min-width: 480px; height: auto; overflow: visible; }
-.grafico .barra-media { fill: var(--linea); }
-.grafico .barra-anno  { fill: var(--vetro); }
-.grafico .linea-temp  { fill: none; stroke: var(--vino); stroke-width: 2.5; stroke-linejoin: round; }
-.grafico .punto-temp  { fill: var(--vino); }
+/* Senza colore le due serie si distinguono per pieno e vuoto, non per tinta:
+   la media è un contorno, l'anno un pieno. */
+.grafico .barra-media { fill: none; stroke: var(--accento-2); stroke-width: 1.5; }
+.grafico .barra-anno  { fill: var(--accento-2); }
+.grafico .linea-temp  { fill: none; stroke: var(--accento); stroke-width: 2.5; stroke-linejoin: round; }
+.grafico .punto-temp  { fill: var(--accento); }
 .grafico .griglia-linea { stroke: var(--linea); stroke-width: 1; }
 .grafico .tacca, .grafico .etichetta-x {
   font-family: var(--sans); font-size: 14px; fill: var(--inchiostro-lieve);
 }
 .grafico .etichetta-x { text-anchor: middle; font-weight: 500; }
-.grafico .tacca.destra { text-anchor: start; fill: var(--vino); }
+.grafico .tacca.destra { text-anchor: start; fill: var(--accento); }
 
 .legenda-grafico {
   display: flex; flex-wrap: wrap; gap: 10px 26px; margin-top: 18px;
@@ -427,14 +416,14 @@ section.alt .scheda { background: var(--carta); }
   display: inline-block; width: 14px; height: 14px; margin-right: 8px;
   vertical-align: -2px; border-radius: 2px;
 }
-.legenda-grafico .chiave.media { background: var(--linea); }
-.legenda-grafico .chiave.anno  { background: var(--vetro); }
-.legenda-grafico .chiave.temp  { background: var(--vino); border-radius: 999px; }
+.legenda-grafico .chiave.media { background: transparent; border: 1.5px solid var(--accento-2); }
+.legenda-grafico .chiave.anno  { background: var(--accento-2); }
+.legenda-grafico .chiave.temp  { background: var(--accento); border-radius: 999px; }
 
 .racconto-annata { max-width: var(--stretto); }
 .racconto-annata p:first-child::first-letter {
   font-size: 3.2em; font-weight: 500; line-height: .8;
-  float: left; padding: 4px 10px 0 0; color: var(--vino);
+  float: left; padding: 4px 10px 0 0; color: var(--accento);
 }
 .fonte-dati {
   border-top: 1px solid var(--linea); padding-top: 16px; margin-top: 36px;
@@ -458,7 +447,7 @@ section.alt .scheda { background: var(--carta); }
 /* --------------------------------- Note --------------------------------- */
 
 .nota-box {
-  border-left: 4px solid var(--vino); background: var(--carta);
+  border-left: 4px solid var(--accento); background: var(--carta);
   padding: 24px 28px; font-size: 1.02rem; color: var(--inchiostro-lieve);
   border-radius: 0 var(--radius) var(--radius) 0;
 }
@@ -466,7 +455,7 @@ section.alt .scheda { background: var(--carta); }
 
 .citazione {
   font-size: clamp(1.9rem, 4.2vw, 3rem); font-weight: 500; letter-spacing: -0.03em; line-height: 1.15;
-  border-left: 2px solid var(--vino); padding-left: 28px; margin: 0; color: var(--inchiostro);
+  border-left: 2px solid var(--accento); padding-left: 28px; margin: 0; color: var(--inchiostro);
 }
 
 /* ------------------------------- Moduli --------------------------------- */
@@ -480,7 +469,7 @@ section.alt .scheda { background: var(--carta); }
   padding: 11px 13px; width: 100%;
 }
 .campo input:focus, .campo textarea:focus, .campo select:focus {
-  outline: 2px solid var(--vino); outline-offset: 1px; border-color: var(--vino);
+  outline: 2px solid var(--accento); outline-offset: 1px; border-color: var(--accento);
 }
 .campo textarea { min-height: 150px; resize: vertical; }
 .campo .aiuto { font-size: .8rem; color: var(--inchiostro-lieve); text-transform: none; letter-spacing: 0; font-weight: 400; }
@@ -488,7 +477,7 @@ section.alt .scheda { background: var(--carta); }
 /* ------------------------------- Footer --------------------------------- */
 
 /* Il piede è scuro: chiude la pagina e non rischia di confondersi con la
-   sezione pastello che lo precede, qualunque essa sia. */
+   sezione grigia che lo precede, qualunque essa sia. */
 .site-footer {
   padding-block: clamp(64px, 8vw, 100px) 36px;
   font-size: .98rem;
@@ -498,12 +487,12 @@ section.alt .scheda { background: var(--carta); }
 .site-footer .griglia { gap: 40px; }
 .site-footer h4 {
   font-size: .98rem; letter-spacing: .1em; text-transform: uppercase;
-  color: var(--pastello-1); margin-bottom: 16px;
+  color: var(--fondo-1); margin-bottom: 16px;
 }
 .site-footer ul { list-style: none; margin: 0; padding: 0; }
 .site-footer li { margin-bottom: 9px; }
 .site-footer a { color: var(--carta); text-decoration: none; }
-.site-footer a:hover { color: var(--pastello-1); text-decoration: underline; }
+.site-footer a:hover { color: var(--fondo-1); text-decoration: underline; }
 .site-footer .guida { color: color-mix(in srgb, var(--carta) 62%, transparent); }
 .site-footer .coda {
   margin-top: 52px; padding-top: 24px;

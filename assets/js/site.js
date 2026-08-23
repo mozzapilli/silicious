@@ -586,24 +586,7 @@
 
   /* ------------------------- Navigazione e footer ----------------------- */
 
-    /* ---------------- Confronto fra le due versioni di colore --------------
-     TEMPORANEO. ?stile=mono mostra la versione monocromatica, ?stile=pastello
-     torna a quella a colori. La scelta resta valida navigando fra le pagine.
-     Da togliere insieme al blocco [data-stile] del foglio di stile. */
-
-  function applicaStileDiProva() {
-    var richiesto = null;
-    try {
-      richiesto = new URLSearchParams(window.location.search).get("stile");
-      if (richiesto) localStorage.setItem("silicious-stile", richiesto);
-      else richiesto = localStorage.getItem("silicious-stile");
-    } catch (e) { /* niente URLSearchParams o niente localStorage: pazienza */ }
-
-    if (richiesto === "mono") document.documentElement.setAttribute("data-stile", "mono");
-    else document.documentElement.removeAttribute("data-stile");
-  }
-
-  function collegaNavigazione() {
+      function collegaNavigazione() {
     var bottone = el(".menu-toggle");
     var nav = el(".nav");
     if (bottone && nav) {
@@ -659,7 +642,6 @@
   };
 
   function avvia() {
-    applicaStileDiProva();
     collegaNavigazione();
     riempiSegnaposto();
     collegaModuli();

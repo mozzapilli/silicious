@@ -97,9 +97,11 @@ window.SILICIOUS = {
       copertina: "assets/img/messaggio-01/ampolla-piena.jpg",
       copertinaAlt: "L'ampolla di vetro da 60 litri piena di vino, nella cantina di Fattoria Ispoli",
 
-      /* Colore del vino nel disegno dell'ampolla. Sangiovese giovane: rubino
-         con riflessi granato. Per un bianco usare toni ambra tipo "#D8B76A". */
-      coloreVino: "#7C1E2B",
+      /* Colore del liquido nel disegno dell'ampolla.
+         Il sito è in bianco e nero, quindi qui c'è un grigio scuro: è un
+         disegno tecnico, non una fotografia. Se preferisci il vino vero,
+         basta rimettere "#7C1E2B" per un rosso o "#D8B76A" per un bianco. */
+      coloreVino: "#3A3730",
 
       /* ---- L'azienda ospitante ----
          Dati verificati sul sito dell'azienda e sul portale del Consorzio.
