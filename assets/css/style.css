@@ -263,6 +263,119 @@ section.alt .scheda { background: var(--carta); }
 }
 .scheda.con-foto .corpo { padding: 26px 28px 28px; display: flex; flex-direction: column; flex: 1; }
 
+/* ------------------------ L'ampolla che si riempie ---------------------- */
+
+.ampolla { display: flex; align-items: center; gap: clamp(24px, 5vw, 56px); flex-wrap: wrap; }
+.ampolla svg { width: min(240px, 52vw); height: auto; flex: none; }
+
+.ampolla .vetro    { fill: none; stroke: var(--inchiostro); stroke-width: 3; }
+.ampolla .acciaio  { fill: none; stroke: var(--inchiostro); stroke-width: 3; stroke-linejoin: round; }
+.ampolla .sostegno { fill: none; stroke: var(--inchiostro); stroke-width: 3; stroke-linecap: round; }
+.ampolla .riflesso { fill: none; stroke: var(--carta); stroke-width: 5; opacity: .55; stroke-linecap: round; }
+.ampolla .pelo     { fill: rgba(255, 255, 255, .35); }
+
+/* --salita è scritta sull'elemento dal JavaScript: 0 = ampolla piena di tempo,
+   190 = fase appena cominciata. L'animazione parte dal fondo e sale fino lì.
+   Senza animazione (o con "riduci animazioni") resta comunque il valore giusto. */
+.ampolla .livello {
+  transform: translateY(var(--salita, 190px));
+  animation: si-riempie 1.6s cubic-bezier(.22, .61, .36, 1);
+}
+@keyframes si-riempie { from { transform: translateY(190px); } }
+
+.ampolla-legenda { display: flex; flex-direction: column; gap: 8px; min-width: 210px; }
+.ampolla-percento {
+  font-family: var(--serif); font-size: clamp(2.6rem, 6vw, 3.6rem); line-height: 1;
+  color: var(--vino);
+}
+.ampolla-fase {
+  font-size: .78rem; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--terra); font-weight: 600;
+}
+.ampolla-manca { color: var(--inchiostro-lieve); font-size: .95rem; }
+
+/* --------------------------------- Mappa -------------------------------- */
+
+.mappa-attesa {
+  border: 1px dashed var(--linea); border-radius: var(--radius);
+  padding: 32px; text-align: center;
+  background:
+    repeating-linear-gradient(45deg, transparent 0 12px, rgba(169, 123, 79, .05) 12px 24px),
+    var(--carta-alt);
+}
+.mappa-attesa p:last-child { margin: 18px auto 0; max-width: 460px; }
+.mappa {
+  height: clamp(320px, 50vh, 460px);
+  border: 1px solid var(--linea); border-radius: var(--radius);
+  background: var(--carta-alt); z-index: 0;
+}
+.mappa .leaflet-control-attribution { font-size: 11px; }
+
+/* -------------------------- L'azienda ospitante ------------------------- */
+
+.azienda .collegamenti { display: flex; flex-wrap: wrap; gap: 8px 20px; }
+.azienda .collegamenti a { font-size: .93rem; font-weight: 500; }
+
+/* --------------------------- Indici dell'annata ------------------------- */
+
+.indici { margin-bottom: 48px; }
+.indice {
+  border-top: 2px solid var(--inchiostro); padding-top: 20px;
+  display: flex; flex-direction: column; gap: 6px;
+}
+.indice .numero {
+  font-family: var(--serif); font-size: clamp(2.2rem, 5vw, 3rem); line-height: 1;
+  color: var(--inchiostro);
+}
+.indice .numero small { font-size: .4em; color: var(--inchiostro-lieve); }
+.indice .etichetta {
+  font-size: .8rem; letter-spacing: .08em; text-transform: uppercase;
+  font-weight: 600; color: var(--inchiostro-lieve);
+}
+.indice .scarto { font-size: .88rem; color: var(--terra); }
+.indice .scarto.su  { color: var(--vino); }
+.indice .scarto.giu { color: var(--vetro); }
+
+/* --------------------------- Grafico dell'annata ------------------------ */
+
+/* Su schermo stretto il grafico non si comprime — le etichette diventerebbero
+   illeggibili — ma scorre in orizzontale dentro il suo contenitore. */
+.grafico { margin: 0 0 44px; overflow-x: auto; padding-block: 8px; }
+.grafico svg { width: 100%; min-width: 480px; height: auto; overflow: visible; }
+.grafico .barra-media { fill: var(--linea); }
+.grafico .barra-anno  { fill: var(--vetro); }
+.grafico .linea-temp  { fill: none; stroke: var(--vino); stroke-width: 2.5; stroke-linejoin: round; }
+.grafico .punto-temp  { fill: var(--vino); }
+.grafico .griglia-linea { stroke: var(--linea); stroke-width: 1; }
+.grafico .tacca, .grafico .etichetta-x {
+  font-family: var(--sans); font-size: 14px; fill: var(--inchiostro-lieve);
+}
+.grafico .etichetta-x { text-anchor: middle; font-weight: 500; }
+.grafico .tacca.destra { text-anchor: start; fill: var(--vino); }
+
+.legenda-grafico {
+  display: flex; flex-wrap: wrap; gap: 10px 26px; margin-top: 18px;
+  font-size: .85rem; color: var(--inchiostro-lieve);
+  padding-left: 0; border-left: 0;
+}
+.legenda-grafico .chiave {
+  display: inline-block; width: 14px; height: 14px; margin-right: 8px;
+  vertical-align: -2px; border-radius: 2px;
+}
+.legenda-grafico .chiave.media { background: var(--linea); }
+.legenda-grafico .chiave.anno  { background: var(--vetro); }
+.legenda-grafico .chiave.temp  { background: var(--vino); border-radius: 999px; }
+
+.racconto-annata { max-width: var(--stretto); }
+.racconto-annata p:first-child::first-letter {
+  font-family: var(--serif); font-size: 3.1em; line-height: .82;
+  float: left; padding: 4px 10px 0 0; color: var(--vino);
+}
+.fonte-dati {
+  border-top: 1px solid var(--linea); padding-top: 16px; margin-top: 36px;
+  max-width: var(--stretto);
+}
+
 /* --------------------------- Tabelle tecniche --------------------------- */
 
 .dati { border-top: 1px solid var(--inchiostro); margin-top: 8px; }

@@ -257,16 +257,288 @@
 
   /* ----------------- Blocchi della pagina di un Messaggio --------------- */
 
-  function renderStatoMessaggio(nodo) {
+  function trovaMessaggio(nodo) {
     var n = parseInt(nodo.getAttribute("data-messaggio"), 10);
-    var m = (D.messaggi || []).filter(function (x) { return x.numero === n; })[0];
+    return (D.messaggi || []).filter(function (x) { return x.numero === n; })[0];
+  }
+
+  function renderStatoMessaggio(nodo) {
+    var m = trovaMessaggio(nodo);
     if (!m) { nodo.innerHTML = ""; return; }
     nodo.innerHTML = barraMessaggio(m);
   }
 
+  /* --------------------------- L'ampolla che si riempie -----------------
+     Il disegno non rappresenta il livello del vino — l'ampolla è piena dal
+     primo giorno — ma il tempo trascorso della fase in corso: si riempie via
+     via che ci si avvicina alla fine dell'affinamento.                     */
+
+  var ALTEZZA_UTILE = 190;   // dalla base della sfera alla sommità del collo
+  var BASE_Y = 256;
+
+  function renderAmpolla(nodo) {
+    var m = trovaMessaggio(nodo);
+    if (!m) { nodo.innerHTML = ""; return; }
+    var f = faseCorrente(m);
+    var p = m.stato === "concluso" ? 100 : percentuale(f.da, f.a);
+    var colore = m.coloreVino || "#7C1E2B";
+    var salita = ALTEZZA_UTILE * (1 - p / 100);
+
+    nodo.innerHTML =
+      '<div class="ampolla">' +
+        '<svg viewBox="0 0 220 300" role="img" aria-label="Disegno dell\'ampolla riempita per ' +
+            Math.round(p) + ' per cento, a rappresentare il tempo trascorso">' +
+          "<defs>" +
+            '<clipPath id="dentro-ampolla">' +
+              '<rect x="88" y="66" width="44" height="50"/>' +
+              '<circle cx="110" cy="182" r="74"/>' +
+            "</clipPath>" +
+          "</defs>" +
+
+          /* Il vino, ritagliato dentro la sagoma. Quanto scende il blocco rispetto
+             al bordo superiore è scritto in --salita: da lì il CSS ricava sia la
+             posizione finale sia l'animazione di riempimento. */
+          '<g clip-path="url(#dentro-ampolla)">' +
+            '<rect class="livello" x="20" y="66" width="180" height="' + ALTEZZA_UTILE + '" ' +
+                  'fill="' + esc(colore) + '" style="--salita:' + salita.toFixed(1) + 'px"/>' +
+            '<rect class="livello pelo" x="20" y="66" width="180" height="3" ' +
+                  'style="--salita:' + salita.toFixed(1) + 'px"/>' +
+          "</g>" +
+
+          /* il vetro */
+          '<circle class="vetro" cx="110" cy="182" r="74"/>' +
+          '<path class="vetro" d="M88 108 L88 66 L132 66 L132 108"/>' +
+          '<ellipse class="acciaio" cx="110" cy="64" rx="34" ry="7"/>' +
+          '<path class="acciaio" d="M104 62 L104 34 Q110 26 116 34 L116 62 Z"/>' +
+          '<path class="sostegno" d="M74 240 L64 278 M110 256 L110 280 M146 240 L156 278"/>' +
+          '<path class="riflesso" d="M72 150 Q66 182 80 212"/>' +
+        "</svg>" +
+
+        '<div class="ampolla-legenda">' +
+          '<span class="ampolla-percento">' + Math.round(p) + "%</span>" +
+          '<span class="ampolla-fase">' + esc(f.etichetta.toLowerCase()) + " · " +
+            esc(f.daLabel.toLowerCase()) + " " + esc(meseAnno(f.da)) + "</span>" +
+          (f.contoLabel
+            ? '<span class="ampolla-manca">Mancano <strong>' + esc(mancano(f.a)) +
+              "</strong> " + esc(f.contoLabel) + "</span>"
+            : "") +
+        "</div>" +
+      "</div>";
+  }
+
+  /* ------------------------- L'azienda ospitante ------------------------ */
+
+  function renderAzienda(nodo) {
+    var m = trovaMessaggio(nodo);
+    var a = m && m.aziendaInfo;
+    if (!a) { nodo.innerHTML = ""; return; }
+
+    var collegamenti = [
+      { url: a.sito,      testo: "Sito dell'azienda" },
+      { url: a.instagram, testo: "Instagram" },
+      { url: a.facebook,  testo: "Facebook" },
+      { url: a.consorzio, testo: "Scheda del Consorzio Chianti Classico" }
+    ].filter(function (c) { return c.url; });
+
+    nodo.innerHTML =
+      '<div class="scheda azienda">' +
+        '<span class="meta">Azienda ospitante</span>' +
+        "<h3>" + esc(m.azienda) + "</h3>" +
+        (m.vignaiolo ? "<p>Vignaiolo: <strong>" + esc(m.vignaiolo) + "</strong></p>" : "") +
+        (a.indirizzo ? '<p class="guida">' + esc(a.indirizzo) + "</p>" : "") +
+        (a.nota ? "<p>" + esc(a.nota) + "</p>" : "") +
+        '<div class="piede collegamenti">' +
+          collegamenti.map(function (c) {
+            return '<a href="' + esc(c.url) + '" target="_blank" rel="noopener noreferrer">' +
+              esc(c.testo) + "</a>";
+          }).join("") +
+        "</div>" +
+      "</div>";
+  }
+
+  /* --------------------------------- Mappa ------------------------------
+     La mappa si carica solo se il visitatore la chiede: finché non clicca,
+     nessun dato parte verso server esterni.                                */
+
+  var LEAFLET = {
+    css: { url: "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css",
+           sri: "sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" },
+    js:  { url: "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js",
+           sri: "sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" }
+  };
+
+  function renderMappa(nodo) {
+    var m = trovaMessaggio(nodo);
+    var mp = m && m.mappa;
+    if (!mp || !mp.lat) { nodo.innerHTML = ""; return; }
+
+    var osm = "https://www.openstreetmap.org/?mlat=" + mp.lat + "&mlon=" + mp.lon +
+              "#map=" + (mp.zoom || 16) + "/" + mp.lat + "/" + mp.lon;
+
+    nodo.innerHTML =
+      '<div class="mappa-attesa">' +
+        "<p><strong>" + esc(mp.etichetta || m.azienda) + "</strong><br>" +
+          '<span class="guida piccolo">' + mp.lat.toFixed(5).replace(".", ",") + "° N — " +
+          mp.lon.toFixed(5).replace(".", ",") + "° E</span></p>" +
+        '<button class="btn" type="button">Mostra la mappa</button>' +
+        '<p class="piccolo guida">La mappa è fornita da OpenStreetMap: si carica solo se la ' +
+          "richiedi, e in quel momento il tuo indirizzo IP raggiunge i loro server. " +
+          'In alternativa puoi <a href="' + esc(osm) + '" target="_blank" rel="noopener noreferrer">' +
+          "aprire la posizione su OpenStreetMap</a>.</p>" +
+      "</div>";
+
+    el("button", nodo).addEventListener("click", function () {
+      nodo.innerHTML = '<div class="mappa" id="mappa-' + m.numero + '"></div>' +
+        '<p class="piccolo guida" style="margin-top:10px">Cartografia © contributori OpenStreetMap.</p>';
+      caricaLeaflet(function () { disegnaMappa("mappa-" + m.numero, m); },
+        function () {
+          nodo.innerHTML = '<p class="vuoto">Non è stato possibile caricare la mappa. ' +
+            '<a href="' + esc(osm) + '" target="_blank" rel="noopener noreferrer">' +
+            "Apri la posizione su OpenStreetMap</a>.</p>";
+        });
+    });
+  }
+
+  function caricaLeaflet(ok, ko) {
+    if (window.L) { ok(); return; }
+    var css = document.createElement("link");
+    css.rel = "stylesheet"; css.href = LEAFLET.css.url;
+    css.integrity = LEAFLET.css.sri; css.crossOrigin = "anonymous";
+    document.head.appendChild(css);
+
+    var js = document.createElement("script");
+    js.src = LEAFLET.js.url;
+    js.integrity = LEAFLET.js.sri; js.crossOrigin = "anonymous";
+    js.onload = ok; js.onerror = ko;
+    document.head.appendChild(js);
+  }
+
+  function disegnaMappa(id, m) {
+    var mp = m.mappa;
+    var mappa = L.map(id, { scrollWheelZoom: false }).setView([mp.lat, mp.lon], mp.zoom || 16);
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 19,
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(mappa);
+
+    L.circleMarker([mp.lat, mp.lon], {
+      radius: 9, color: "#6B1F2E", weight: 2, fillColor: "#6B1F2E", fillOpacity: .85
+    }).addTo(mappa).bindTooltip(mp.etichetta || m.azienda, { permanent: false });
+
+    if (mp.vigna && mp.vigna.length > 2) {
+      var poligono = L.polygon(mp.vigna, {
+        color: "#6B1F2E", weight: 2, fillColor: "#A97B4F", fillOpacity: .35
+      }).addTo(mappa).bindTooltip(m.titolo, { permanent: false });
+      mappa.fitBounds(poligono.getBounds().pad(0.6));
+    }
+  }
+
+  /* ------------------------ L'annata: dati meteo ------------------------ */
+
+  function renderMeteo(nodo) {
+    var m = trovaMessaggio(nodo);
+    var w = m && m.meteo;
+    if (!w) { nodo.innerHTML = ""; return; }
+
+    var indici = (w.indici || []).map(function (i) {
+      var confronto = "";
+      if (i.media !== undefined && i.media !== null) {
+        var su = i.valore > i.media;
+        /* Su numeri piccoli la percentuale è fuorviante — undici giorni contro tre
+           fanno "+267%", che suona enorme e dice poco. Meglio il dato nudo. */
+        if (i.media >= 50) {
+          var scarto = Math.round((i.valore - i.media) / i.media * 100);
+          confronto = (scarto > 0 ? "+" : "") + scarto + "% " + (su ? "sopra" : "sotto") +
+                      " la media di " + numero(i.media);
+        } else {
+          confronto = "contro una media di " + numero(i.media);
+        }
+        confronto = '<span class="scarto ' + (su ? "su" : "giu") + '">' + confronto + "</span>";
+      }
+      return '<div class="indice">' +
+          '<span class="numero">' + numero(i.valore) +
+            (i.unita ? ' <small>' + esc(i.unita) + "</small>" : "") + "</span>" +
+          '<span class="etichetta">' + esc(i.etichetta) + "</span>" +
+          confronto +
+        "</div>";
+    }).join("");
+
+    nodo.innerHTML =
+      '<div class="griglia griglia-3 indici">' + indici + "</div>" +
+      graficoMensile(w) +
+      '<div class="racconto-annata">' +
+        (w.racconto || []).map(function (p) { return "<p>" + esc(p) + "</p>"; }).join("") +
+      "</div>" +
+      '<p class="piccolo guida fonte-dati"><strong>Fonte dei dati:</strong> ' + esc(w.fonte) +
+        " Periodo considerato: " + esc(w.periodo) + "; confronto con la " + esc(w.riferimento) + ".</p>";
+  }
+
+  function graficoMensile(w) {
+    var dati = w.mensili || [];
+    if (!dati.length) return "";
+
+    var W = 680, H = 300, ML = 44, MR = 44, MT = 20, MB = 46;
+    var larghezza = W - ML - MR, altezza = H - MT - MB;
+    var passo = larghezza / dati.length;
+
+    var maxP = Math.max.apply(null, dati.map(function (d) {
+      return Math.max(d.pioggia, d.pioggiaMedia); }));
+    maxP = Math.ceil(maxP / 25) * 25;
+    var maxT = 30;
+
+    var yP = function (v) { return MT + altezza - (v / maxP) * altezza; };
+    var yT = function (v) { return MT + altezza - (v / maxT) * altezza; };
+
+    var barre = dati.map(function (d, i) {
+      var x = ML + i * passo;
+      var largaMedia = passo * 0.30, larga = passo * 0.30;
+      return '<rect class="barra-media" x="' + (x + passo * 0.16) + '" y="' + yP(d.pioggiaMedia) +
+               '" width="' + largaMedia + '" height="' + (MT + altezza - yP(d.pioggiaMedia)) + '"/>' +
+             '<rect class="barra-anno" x="' + (x + passo * 0.50) + '" y="' + yP(d.pioggia) +
+               '" width="' + larga + '" height="' + (MT + altezza - yP(d.pioggia)) + '"/>' +
+             '<text class="etichetta-x" x="' + (x + passo / 2) + '" y="' + (MT + altezza + 20) +
+               '">' + esc(d.mese) + "</text>";
+    }).join("");
+
+    var punti = function (chiave) {
+      return dati.map(function (d, i) {
+        return (ML + i * passo + passo / 2).toFixed(1) + "," + yT(d[chiave]).toFixed(1);
+      }).join(" ");
+    };
+
+    var pallini = dati.map(function (d, i) {
+      return '<circle class="punto-temp" cx="' + (ML + i * passo + passo / 2) +
+             '" cy="' + yT(d.temp) + '" r="3.5"/>';
+    }).join("");
+
+    var tacche = "";
+    for (var v = 0; v <= maxP; v += maxP / 4) {
+      tacche += '<line class="griglia-linea" x1="' + ML + '" y1="' + yP(v) + '" x2="' + (W - MR) +
+                '" y2="' + yP(v) + '"/>' +
+                '<text class="tacca" x="' + (ML - 8) + '" y="' + (yP(v) + 4) + '" text-anchor="end">' +
+                v + "</text>";
+    }
+    for (var t = 0; t <= maxT; t += 10) {
+      tacche += '<text class="tacca destra" x="' + (W - MR + 8) + '" y="' + (yT(t) + 4) + '">' +
+                t + "</text>";
+    }
+
+    return '<figure class="grafico">' +
+        '<svg viewBox="0 0 ' + W + " " + H + '" role="img" ' +
+          'aria-label="Pioggia mensile del 2025 confrontata con la media 1995-2024 e temperatura media mensile del 2025">' +
+          tacche + barre +
+          '<polyline class="linea-temp" points="' + punti("temp") + '"/>' + pallini +
+        "</svg>" +
+        '<figcaption class="legenda-grafico">' +
+          '<span><i class="chiave media"></i>Pioggia, media 1995–2024 (mm)</span>' +
+          '<span><i class="chiave anno"></i>Pioggia 2025 (mm)</span>' +
+          '<span><i class="chiave temp"></i>Temperatura media 2025 (°C, scala a destra)</span>' +
+        "</figcaption>" +
+      "</figure>";
+  }
+
   function renderDegustazione(nodo) {
-    var n = parseInt(nodo.getAttribute("data-messaggio"), 10);
-    var m = (D.messaggi || []).filter(function (x) { return x.numero === n; })[0];
+    var m = trovaMessaggio(nodo);
     var d = m && m.degustazione;
     if (!d) {
       nodo.innerHTML = '<p class="vuoto">La scheda di degustazione sarà pubblicata ' +
@@ -362,6 +634,10 @@
     "linee": renderLinee,
     "partner": renderPartner,
     "stato-messaggio": renderStatoMessaggio,
+    "ampolla": renderAmpolla,
+    "azienda": renderAzienda,
+    "mappa": renderMappa,
+    "meteo": renderMeteo,
     "degustazione": renderDegustazione
   };
 

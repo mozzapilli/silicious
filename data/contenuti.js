@@ -97,6 +97,92 @@ window.SILICIOUS = {
       copertina: "assets/img/messaggio-01/ampolla-piena.jpg",
       copertinaAlt: "L'ampolla di vetro da 60 litri piena di vino, nella cantina di Fattoria Ispoli",
 
+      /* Colore del vino nel disegno dell'ampolla. Sangiovese giovane: rubino
+         con riflessi granato. Per un bianco usare toni ambra tipo "#D8B76A". */
+      coloreVino: "#7C1E2B",
+
+      /* ---- L'azienda ospitante ----
+         Dati verificati sul sito dell'azienda e sul portale del Consorzio.
+         Il recapito telefonico è il cellulare personale del vignaiolo e non
+         viene pubblicato: chi vuole contattarlo passa dal sito dell'azienda. */
+      aziendaInfo: {
+        indirizzo: "Via Santa Lucia 2, località Mercatale — 50026 San Casciano in Val di Pesa (FI)",
+        sito: "https://www.fattoria-ispoli.com/",
+        instagram: "https://www.instagram.com/fattoria.ispoli/",
+        facebook: "https://www.facebook.com/fattoria.ispoli",
+        consorzio: "https://www.chianticlassico.com/it/aziende/fattoria-ispoli/",
+        nota: "Azienda biologica certificata, tra le prime del Chianti Classico a intraprendere " +
+              "questa strada negli anni Ottanta."
+      },
+
+      /* ---- Mappa ----
+         Coordinate della cantina. Per disegnare il contorno della Vigna del
+         Borraccio riempire "vigna" con l'elenco dei vertici [latitudine, longitudine]:
+         si ottiene in due minuti su geojson.io disegnando il perimetro sulla
+         foto satellitare, oppure esportando la particella da 4Grapes / dal
+         fascicolo aziendale. Finché resta null, la mappa mostra solo la cantina. */
+      mappa: {
+        lat: 43.644126,
+        lon: 11.243592,
+        zoom: 16,
+        etichetta: "Fattoria Ispoli",
+        vigna: null
+      },
+
+      /* ---- L'annata dal punto di vista meteorologico ----
+         I valori vengono dalla rianalisi ERA5: sono la ricostruzione del clima
+         su una cella di circa 9 km centrata sulla tenuta, NON la stazione
+         meteo aziendale. Se Ispoli ha dati propri, sostituiscili: sono meglio. */
+      meteo: {
+        periodo: "1 aprile – 27 settembre 2025",
+        riferimento: "media 1995–2024, stessa finestra",
+        fonte: "Rianalisi ERA5 elaborata via Open-Meteo sul punto della tenuta " +
+               "(43,6438 N — 11,2433 E). Non sono dati di stazione aziendale.",
+
+        indici: [
+          { etichetta: "Pioggia cumulata",      valore: 465,  unita: "mm", media: 345 },
+          { etichetta: "Gradi giorno, base 10", valore: 1911, unita: "",   media: 1632 },
+          { etichetta: "Giorni oltre 35 °C",    valore: 11,   unita: "",   media: 3 }
+        ],
+
+        mensili: [
+          { mese: "Apr", pioggia:  95, pioggiaMedia: 78, temp: 13.5, tempMedia: 11.6 },
+          { mese: "Mag", pioggia:  94, pioggiaMedia: 76, temp: 16.3, tempMedia: 15.8 },
+          { mese: "Giu", pioggia:  15, pioggiaMedia: 46, temp: 24.9, tempMedia: 20.4 },
+          { mese: "Lug", pioggia:  91, pioggiaMedia: 27, temp: 24.1, tempMedia: 23.4 },
+          { mese: "Ago", pioggia: 100, pioggiaMedia: 36, temp: 24.4, tempMedia: 23.4 },
+          { mese: "Set", pioggia:  69, pioggiaMedia: 89, temp: 20.1, tempMedia: 18.8 }
+        ],
+
+        racconto: [
+          "L'annata comincia prima di cominciare. Tra ottobre 2024 e marzo 2025 sono caduti " +
+          "704 millimetri: l'argilla del Borraccio è arrivata alla primavera con la riserva " +
+          "idrica piena, ed è questa scorta che spiega buona parte di quello che succede dopo.",
+
+          "Aprile e maggio restano sopra la media per pioggia — 95 e 94 millimetri contro 78 e 76 — " +
+          "con temperature di poco superiori alla norma. Poi giugno rompe il ritmo: 15 millimetri " +
+          "contro i 46 abituali e una media mensile di 4,5 gradi sopra la norma, con tre giorni " +
+          "oltre i 35 °C fra il 28 e il 30. Il periodo asciutto si allunga fino al 5 luglio, " +
+          "tredici giorni consecutivi senza pioggia.",
+
+          "È il momento in cui l'annata avrebbe potuto perdersi, e non lo fa. Luglio e agosto " +
+          "riportano acqua molto sopra la media — 91 e 100 millimetri contro 27 e 36 — che " +
+          "interrompe lo stress prima che diventi blocco vegetativo. La seconda ondata di calore, " +
+          "dal 9 al 13 agosto, tocca il massimo assoluto della stagione con 37,3 °C il 13, ma " +
+          "trova la pianta rifornita.",
+
+          "Settembre torna sotto la media di pioggia, 69 millimetri contro 89, con temperature " +
+          "miti. La vendemmia del Borraccio è del 27 settembre.",
+
+          "La lettura d'insieme è di un'annata calda in termini assoluti — 1.911 gradi giorno " +
+          "contro una media di 1.632 — ma in cui il caldo è arrivato concentrato in due episodi " +
+          "brevi, con acqua prima e dopo ciascuno. Per accumulo termico il 2025 somiglia al 2023 " +
+          "e al 2018; per disponibilità idrica sta molto sopra entrambi, con 465 millimetri " +
+          "contro i 400 del 2023 e i 337 del 2018. È la combinazione, più che il singolo dato, " +
+          "a raccontare la maturazione regolare osservata in vigna."
+        ]
+      },
+
       date: {
         riempimento: "2025-12-13",        // giorno in cui l'ampolla è stata riempita
         imbottigliamento: "2026-11-15",   // data prevista o effettiva
