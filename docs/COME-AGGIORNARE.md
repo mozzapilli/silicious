@@ -1,5 +1,21 @@
 # Come aggiornare il sito
 
+## Provare le tre palette (temporaneo)
+
+Finché non hai scelto i colori definitivi, puoi cambiarli aggiungendo un
+parametro all'indirizzo. La scelta resta valida mentre navighi tra le pagine.
+
+| Indirizzo | Palette |
+|---|---|
+| `.../?stile=base` | pesca, verde vigna, cielo — accento rosso vino |
+| `.../?stile=terra` | cotto, salvia, sabbia — accento terracotta |
+| `.../?stile=fredda` | lilla, menta, cielo — accento indaco |
+
+Quando avrai deciso, si tiene la palette scelta in cima a
+`assets/css/style.css` e si cancellano le altre due insieme alla funzione
+`applicaStileDiProva` in `assets/js/site.js`.
+
+
 Tutto quello che cambia nel tempo — numeri, Messaggi, progetti — sta in un solo file:
 
 ```

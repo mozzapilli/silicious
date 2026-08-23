@@ -3,26 +3,63 @@
    Palette e tipografia del progetto. Modificare qui i colori del sito.
    ========================================================================== */
 
-:root {
-  /* Colori */
-  --carta:      #F6F2EA;   /* fondo pagina, carta naturale */
-  --carta-alt:  #EFE9DD;   /* fondo sezioni alternate */
-  --inchiostro: #16130F;   /* testo principale, nero del logo */
-  --inchiostro-lieve: #514A40;
-  --linea:      #D9D0C0;
-  --vino:       #6B1F2E;   /* accento primario */
-  --terra:      #A97B4F;
-  --vetro:      #6E8C86;
-  --oro:        #B08B3F;
+/* --------------------------------------------------------------------------
+   PALETTE E CARATTERE
+   Un solo carattere su tutto il sito, usato in pesi diversi.
+   I colori sono tutti qui: cambiando questo blocco cambia tutto il sito.
+   -------------------------------------------------------------------------- */
 
-  /* Tipografia */
-  --serif: "Fraunces", Georgia, "Times New Roman", serif;
-  --sans:  "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+:root {
+  /* Fondo e inchiostro */
+  --carta:      #FDFBF6;
+  --inchiostro: #15141A;
+  --inchiostro-lieve: #56535E;
+  --linea:      #E2DED4;
+
+  /* I tre pastelli che si alternano di sezione in sezione */
+  --pastello-1: #FFD9C7;   /* pesca */
+  --pastello-2: #CFE7D6;   /* verde vigna */
+  --pastello-3: #CDDDF3;   /* cielo */
+  --carta-alt:  var(--pastello-1);
+
+  /* Accenti */
+  --vino:  #B02B43;        /* accento primario: bottoni, numeri, sottolineature */
+  --terra: #8E4E23;        /* occhielli e dettagli */
+  --vetro: #2F7D6B;        /* seconda serie nei grafici */
+  --oro:   #C99A2E;
+
+  /* Tipografia — un solo carattere, due ruoli */
+  --testo:  "Schibsted Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --titoli: var(--testo);
+  --serif:  var(--testo);   /* retrocompatibilità: nessun secondo carattere */
+  --sans:   var(--testo);
 
   /* Misure */
-  --container: 1120px;
-  --stretto: 720px;
-  --radius: 2px;
+  --container: 1240px;
+  --stretto: 780px;
+  --radius: 4px;
+}
+
+/* ---- Variante "terra": più calda, virata sul cotto e la salvia ---------- */
+:root[data-stile="terra"] {
+  --carta:      #FCF8F1;
+  --pastello-1: #F4CDB6;
+  --pastello-2: #DCE5C8;
+  --pastello-3: #F1DFC2;
+  --vino:  #993F2B;
+  --terra: #705630;
+  --vetro: #5F7A46;
+}
+
+/* ---- Variante "fredda": lilla, menta, cielo, accento indaco ------------- */
+:root[data-stile="fredda"] {
+  --carta:      #FBFBFE;
+  --pastello-1: #E1D8F5;
+  --pastello-2: #C9EEE4;
+  --pastello-3: #D7E5FA;
+  --vino:  #4A3AA8;
+  --terra: #694EAB;
+  --vetro: #2E8C86;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -33,42 +70,45 @@ body {
   margin: 0;
   background: var(--carta);
   color: var(--inchiostro);
-  font-family: var(--sans);
-  font-size: 17px;
-  line-height: 1.7;
+  font-family: var(--testo);
+  font-size: clamp(17px, 1.15vw, 19px);
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
 img, svg { max-width: 100%; height: auto; display: block; }
 
-a { color: var(--vino); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+a { color: var(--vino); text-underline-offset: 4px; text-decoration-thickness: 1.5px; }
 a:hover { color: var(--inchiostro); }
 
 h1, h2, h3, h4 {
-  font-family: var(--serif);
-  font-weight: 400;
-  line-height: 1.15;
-  letter-spacing: -0.01em;
-  margin: 0 0 .6em;
+  font-family: var(--titoli);
+  font-weight: 500;
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  margin: 0 0 .45em;
+  text-wrap: balance;
 }
-h1 { font-size: clamp(2.2rem, 5.2vw, 3.6rem); }
-h2 { font-size: clamp(1.6rem, 3.4vw, 2.35rem); }
-h3 { font-size: clamp(1.15rem, 2vw, 1.4rem); }
-h4 { font-size: 1.05rem; font-family: var(--sans); font-weight: 600; letter-spacing: .01em; }
-p  { margin: 0 0 1.1em; }
+h1 { font-size: clamp(3rem, 8.5vw, 6.5rem); }
+h2 { font-size: clamp(2.2rem, 5.6vw, 4rem); }
+h3 { font-size: clamp(1.35rem, 2.4vw, 1.85rem); letter-spacing: -0.02em; }
+h4 { font-size: 1rem; font-weight: 600; letter-spacing: 0; }
+p  { margin: 0 0 1em; }
 
-.container { width: 100%; max-width: var(--container); margin-inline: auto; padding-inline: 24px; }
+.container { width: 100%; max-width: var(--container); margin-inline: auto; padding-inline: clamp(24px, 5vw, 56px); }
 .stretto   { max-width: var(--stretto); }
 
+/* Il testo lungo va tenuto stretto: righe da 65-75 caratteri, non di più. */
+section p, .racconto-annata p, .dati dd { max-width: 68ch; }
+
 .occhiello {
-  font-family: var(--sans);
-  font-size: .75rem;
+  font-size: .8rem;
   font-weight: 600;
-  letter-spacing: .16em;
+  letter-spacing: .14em;
   text-transform: uppercase;
   color: var(--terra);
-  margin: 0 0 .9em;
+  margin: 0 0 1.4em;
 }
 
 .guida { color: var(--inchiostro-lieve); }
@@ -88,15 +128,15 @@ p  { margin: 0 0 1.1em; }
   min-height: 68px;
 }
 .marchio { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--inchiostro); }
-.marchio svg, .marchio img { width: 38px; height: 38px; }
-.marchio b { font-family: var(--serif); font-size: 1.22rem; font-weight: 500; letter-spacing: .02em; }
+.marchio svg, .marchio img { width: 34px; height: 34px; }
+.marchio b { font-size: 1.15rem; font-weight: 600; letter-spacing: -0.02em; }
 
 .nav { margin-left: auto; }
-.nav ul { display: flex; gap: 26px; list-style: none; margin: 0; padding: 0; align-items: center; }
+.nav ul { display: flex; gap: 28px; list-style: none; margin: 0; padding: 0; align-items: center; }
 .nav a {
   color: var(--inchiostro); text-decoration: none;
-  font-size: .93rem; font-weight: 500;
-  padding: 6px 0; border-bottom: 1px solid transparent;
+  font-size: .95rem; font-weight: 500;
+  padding: 6px 0; border-bottom: 1.5px solid transparent;
 }
 .nav a:hover { border-bottom-color: var(--terra); }
 .nav a[aria-current="page"] { border-bottom-color: var(--vino); color: var(--vino); }
@@ -122,40 +162,57 @@ p  { margin: 0 0 1.1em; }
 
 .btn {
   display: inline-block;
-  background: var(--vino); color: #fff;
-  padding: 12px 22px; border-radius: var(--radius);
-  font-size: .93rem; font-weight: 600; letter-spacing: .01em;
-  text-decoration: none; border: 1px solid var(--vino); cursor: pointer;
-  transition: background .15s ease, color .15s ease;
+  background: var(--inchiostro); color: var(--carta);
+  padding: 15px 30px; border-radius: 999px;
+  font-size: 1rem; font-weight: 600; letter-spacing: -0.01em;
+  text-decoration: none; border: 1.5px solid var(--inchiostro); cursor: pointer;
+  transition: background .15s ease, color .15s ease, border-color .15s ease;
 }
-.btn:hover { background: var(--inchiostro); border-color: var(--inchiostro); color: #fff; }
-.btn-ghost { background: transparent; color: var(--inchiostro); border-color: var(--inchiostro); }
-.btn-ghost:hover { background: var(--inchiostro); color: var(--carta); }
-.btn-riga { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+.btn:hover { background: var(--vino); border-color: var(--vino); color: #fff; }
+.btn-ghost { background: transparent; color: var(--inchiostro); }
+.btn-ghost:hover { background: var(--inchiostro); border-color: var(--inchiostro); color: var(--carta); }
+.btn-riga { display: flex; flex-wrap: wrap; gap: 14px; margin-top: clamp(32px, 4vw, 48px); }
+
+/* Nel menu il bottone resta piccolo, altrimenti sfonda la barra. */
+.nav .btn { padding: 10px 20px; font-size: .92rem; }
 
 /* ------------------------------ Sezioni --------------------------------- */
 
-section { padding-block: clamp(56px, 8vw, 96px); }
-section.alt { background: var(--carta-alt); }
+section { padding-block: clamp(72px, 11vw, 160px); }
 section.bordo-sopra { border-top: 1px solid var(--linea); }
 
-.intestazione-sezione { max-width: var(--stretto); margin-bottom: 44px; }
+/* I pastelli si alternano da soli lungo la pagina: nessuna classe da scegliere
+   a mano, basta marcare la sezione come "alt". */
+section.alt:nth-of-type(3n+1) { background: var(--pastello-1); }
+section.alt:nth-of-type(3n+2) { background: var(--pastello-2); }
+section.alt:nth-of-type(3n)   { background: var(--pastello-3); }
+
+/* Il titolo va tenuto corto perché è grande; il paragrafo sotto no, altrimenti
+   verrebbe strozzato su tre parole per riga. */
+.intestazione-sezione { max-width: 74ch; margin-bottom: clamp(40px, 5vw, 72px); }
+.intestazione-sezione h1,
+.intestazione-sezione h2 { max-width: 18ch; }
+.intestazione-sezione p.guida { max-width: 58ch; font-size: 1.05em; }
 
 /* -------------------------------- Hero ---------------------------------- */
 
-.hero { padding-block: clamp(64px, 10vw, 120px); text-align: center; }
-.hero .logo-grande { width: min(260px, 60vw); margin: 0 auto 28px; color: var(--inchiostro); }
+.hero { padding-block: clamp(56px, 9vw, 120px) clamp(64px, 10vw, 140px); }
+.hero .logo-grande { width: min(200px, 42vw); margin: 0 0 clamp(36px, 5vw, 64px); color: var(--inchiostro); }
 .hero .payoff {
-  font-family: var(--serif); font-size: clamp(1.25rem, 2.6vw, 1.75rem);
-  line-height: 1.4; max-width: 640px; margin: 0 auto 8px; color: var(--inchiostro);
+  font-size: clamp(2.6rem, 7.4vw, 5.6rem);
+  font-weight: 500; line-height: 1.02; letter-spacing: -0.035em;
+  max-width: 16ch; margin: 0 0 .35em; color: var(--inchiostro);
 }
-.hero .sottotitolo { max-width: 560px; margin: 18px auto 0; color: var(--inchiostro-lieve); }
-.hero .btn-riga { justify-content: center; }
+.hero .sottotitolo {
+  max-width: 52ch; margin: 0; color: var(--inchiostro-lieve);
+  font-size: clamp(1.05rem, 1.7vw, 1.3rem); line-height: 1.5;
+}
+.hero .btn-riga { justify-content: flex-start; }
 
 .tagline {
-  font-family: var(--sans); font-size: .78rem; font-weight: 600;
-  letter-spacing: .3em; text-transform: uppercase; color: var(--terra);
-  margin: 0 0 26px;
+  font-size: .82rem; font-weight: 600;
+  letter-spacing: .28em; text-transform: uppercase; color: var(--terra);
+  margin: 0 0 clamp(20px, 3vw, 34px);
 }
 
 /* ------------------------------- Griglie -------------------------------- */
@@ -167,51 +224,52 @@ section.bordo-sopra { border-top: 1px solid var(--linea); }
 
 /* --------------------------------- KPI ---------------------------------- */
 
-.kpi { text-align: center; }
+.kpi { text-align: left; border-top: 2px solid var(--inchiostro); padding-top: 20px; }
 .kpi .numero {
-  font-family: var(--serif); font-size: clamp(2.1rem, 4.6vw, 3rem);
-  line-height: 1; color: var(--vino); display: block; margin-bottom: 10px;
+  font-size: clamp(3rem, 6.5vw, 4.6rem); font-weight: 500; letter-spacing: -0.045em;
+  line-height: .95; color: var(--inchiostro); display: block; margin-bottom: 14px;
 }
 .kpi .etichetta {
-  font-size: .82rem; letter-spacing: .08em; text-transform: uppercase;
-  color: var(--inchiostro-lieve); font-weight: 500;
+  font-size: .88rem; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--inchiostro-lieve); font-weight: 600;
 }
-.kpi .nota { font-size: .78rem; color: var(--terra); margin-top: 6px; }
+.kpi .nota { font-size: .8rem; color: var(--terra); margin-top: 6px; }
 
 /* ------------------------------- Schede --------------------------------- */
 
 .scheda {
   background: var(--carta);
-  border: 1px solid var(--linea); border-radius: var(--radius);
-  padding: 28px;
+  border: 0; border-radius: var(--radius);
+  padding: clamp(28px, 3vw, 40px);
   display: flex; flex-direction: column;
 }
 section.alt .scheda { background: var(--carta); }
-.scheda h3 { margin-bottom: .4em; }
+.scheda h3 { margin-bottom: .5em; }
 .scheda p:last-child { margin-bottom: 0; }
+.scheda p { font-size: .98rem; }
 .scheda .meta {
-  font-size: .78rem; letter-spacing: .1em; text-transform: uppercase;
-  color: var(--terra); margin-bottom: 10px; font-weight: 600;
+  font-size: .78rem; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--terra); margin-bottom: 14px; font-weight: 600;
 }
-.scheda-link { text-decoration: none; color: inherit; transition: border-color .15s ease; }
-.scheda-link:hover { border-color: var(--inchiostro); }
-.scheda .piede { margin-top: auto; padding-top: 18px; }
+.scheda-link { text-decoration: none; color: inherit; transition: transform .2s ease; }
+.scheda-link:hover { transform: translateY(-4px); }
+.scheda .piede { margin-top: auto; padding-top: 22px; }
 
 /* Passi del ciclo */
-.passo { position: relative; padding-top: 22px; border-top: 2px solid var(--inchiostro); }
+.passo { position: relative; padding-top: 24px; border-top: 2px solid var(--inchiostro); }
 .passo .num {
-  font-family: var(--serif); font-size: 1.05rem; color: var(--terra);
-  display: block; margin-bottom: 8px;
+  font-size: .95rem; font-weight: 600; color: var(--terra);
+  display: block; margin-bottom: 14px; letter-spacing: .08em;
 }
-.passo h3 { font-size: 1.2rem; }
-.passo p { font-size: .95rem; color: var(--inchiostro-lieve); margin-bottom: 0; }
+.passo h3 { font-size: clamp(1.4rem, 2.2vw, 1.9rem); margin-bottom: .5em; }
+.passo p { font-size: 1rem; color: var(--inchiostro-lieve); margin-bottom: 0; }
 
 /* ---------------------------- Barre del tempo --------------------------- */
 
 .tempo { border: 1px solid var(--linea); border-radius: var(--radius); padding: 26px; background: var(--carta); }
 .tempo + .tempo { margin-top: 18px; }
 .tempo .testata { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: baseline; margin-bottom: 6px; }
-.tempo .titolo { font-family: var(--serif); font-size: 1.3rem; }
+.tempo .titolo { font-size: clamp(1.3rem, 2.2vw, 1.7rem); font-weight: 600; letter-spacing: -0.025em; }
 .tempo .fase {
   font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; font-weight: 600;
   padding: 3px 9px; border-radius: 999px; border: 1px solid var(--linea); color: var(--inchiostro-lieve);
@@ -221,14 +279,14 @@ section.alt .scheda { background: var(--carta); }
 .tempo .fase.conclusa  { border-color: var(--terra); color: var(--terra); }
 .tempo .sottotesto { color: var(--inchiostro-lieve); font-size: .92rem; margin-bottom: 18px; }
 
-.barra { height: 8px; background: var(--carta-alt); border: 1px solid var(--linea); border-radius: 999px; overflow: hidden; }
+.barra { height: 10px; background: rgba(21, 20, 26, .09); border: 1px solid var(--linea); border-radius: 999px; overflow: hidden; }
 .barra > i { display: block; height: 100%; background: var(--vino); border-radius: 999px; transition: width .6s ease; }
 .barra-estremi {
   display: flex; justify-content: space-between; gap: 12px;
   font-size: .78rem; color: var(--inchiostro-lieve); margin-top: 8px;
 }
 .conto {
-  font-family: var(--serif); font-size: 1.6rem; color: var(--inchiostro);
+  font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 500; letter-spacing: -0.03em; color: var(--inchiostro);
   margin-top: 16px; display: block;
 }
 .conto small { font-family: var(--sans); font-size: .8rem; color: var(--inchiostro-lieve); letter-spacing: .06em; text-transform: uppercase; display: block; margin-top: 4px; }
@@ -285,7 +343,7 @@ section.alt .scheda { background: var(--carta); }
 
 .ampolla-legenda { display: flex; flex-direction: column; gap: 8px; min-width: 210px; }
 .ampolla-percento {
-  font-family: var(--serif); font-size: clamp(2.6rem, 6vw, 3.6rem); line-height: 1;
+  font-size: clamp(3rem, 7vw, 4.4rem); font-weight: 500; letter-spacing: -0.045em; line-height: .95;
   color: var(--vino);
 }
 .ampolla-fase {
@@ -324,7 +382,7 @@ section.alt .scheda { background: var(--carta); }
   display: flex; flex-direction: column; gap: 6px;
 }
 .indice .numero {
-  font-family: var(--serif); font-size: clamp(2.2rem, 5vw, 3rem); line-height: 1;
+  font-size: clamp(3rem, 6.5vw, 4.6rem); font-weight: 500; letter-spacing: -0.045em; line-height: .95;
   color: var(--inchiostro);
 }
 .indice .numero small { font-size: .4em; color: var(--inchiostro-lieve); }
@@ -368,7 +426,7 @@ section.alt .scheda { background: var(--carta); }
 
 .racconto-annata { max-width: var(--stretto); }
 .racconto-annata p:first-child::first-letter {
-  font-family: var(--serif); font-size: 3.1em; line-height: .82;
+  font-size: 3.2em; font-weight: 500; line-height: .8;
   float: left; padding: 4px 10px 0 0; color: var(--vino);
 }
 .fonte-dati {
@@ -393,14 +451,14 @@ section.alt .scheda { background: var(--carta); }
 /* --------------------------------- Note --------------------------------- */
 
 .nota-box {
-  border-left: 3px solid var(--terra); background: var(--carta-alt);
-  padding: 16px 20px; font-size: .92rem; color: var(--inchiostro-lieve);
+  border-left: 4px solid var(--vino); background: var(--carta);
+  padding: 24px 28px; font-size: 1.02rem; color: var(--inchiostro-lieve);
   border-radius: 0 var(--radius) var(--radius) 0;
 }
 .nota-box strong { color: var(--inchiostro); }
 
 .citazione {
-  font-family: var(--serif); font-size: clamp(1.3rem, 3vw, 1.85rem); line-height: 1.4;
+  font-size: clamp(1.9rem, 4.2vw, 3rem); font-weight: 500; letter-spacing: -0.03em; line-height: 1.15;
   border-left: 2px solid var(--vino); padding-left: 28px; margin: 0; color: var(--inchiostro);
 }
 
@@ -422,24 +480,31 @@ section.alt .scheda { background: var(--carta); }
 
 /* ------------------------------- Footer --------------------------------- */
 
+/* Il piede è scuro: chiude la pagina e non rischia di confondersi con la
+   sezione pastello che lo precede, qualunque essa sia. */
 .site-footer {
-  border-top: 1px solid var(--linea);
-  padding-block: 56px 32px;
-  font-size: .9rem;
-  background: var(--carta-alt);
+  padding-block: clamp(64px, 8vw, 100px) 36px;
+  font-size: .98rem;
+  background: var(--inchiostro);
+  color: color-mix(in srgb, var(--carta) 72%, transparent);
 }
-.site-footer .griglia { gap: 32px; }
-.site-footer h4 { font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; color: var(--terra); margin-bottom: 12px; }
+.site-footer .griglia { gap: 40px; }
+.site-footer h4 {
+  font-size: .78rem; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--pastello-1); margin-bottom: 16px;
+}
 .site-footer ul { list-style: none; margin: 0; padding: 0; }
-.site-footer li { margin-bottom: 7px; }
-.site-footer a { color: var(--inchiostro); text-decoration: none; }
-.site-footer a:hover { color: var(--vino); text-decoration: underline; }
+.site-footer li { margin-bottom: 9px; }
+.site-footer a { color: var(--carta); text-decoration: none; }
+.site-footer a:hover { color: var(--pastello-1); text-decoration: underline; }
+.site-footer .guida { color: color-mix(in srgb, var(--carta) 62%, transparent); }
 .site-footer .coda {
-  margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--linea);
+  margin-top: 52px; padding-top: 24px;
+  border-top: 1px solid color-mix(in srgb, var(--carta) 22%, transparent);
   display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between;
-  font-size: .82rem; color: var(--inchiostro-lieve);
+  font-size: .85rem; color: color-mix(in srgb, var(--carta) 62%, transparent);
 }
-.site-footer .logo-piede { width: 44px; color: var(--inchiostro); margin-bottom: 14px; }
+.site-footer .logo-piede { width: 48px; color: var(--carta); margin-bottom: 20px; }
 
 /* ------------------------------ Utilità --------------------------------- */
 

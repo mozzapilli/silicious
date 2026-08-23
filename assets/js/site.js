@@ -586,6 +586,27 @@
 
   /* ------------------------- Navigazione e footer ----------------------- */
 
+  /* ------------------------ Prova delle palette -------------------------
+     STRUMENTO TEMPORANEO, da togliere una volta scelta la palette.
+     Aggiungendo ?stile=terra o ?stile=fredda all'indirizzo, il sito cambia
+     colori e la scelta resta valida navigando tra le pagine.
+     ?stile=base torna alla palette predefinita.                            */
+
+  function applicaStileDiProva() {
+    var richiesto = null;
+    try {
+      richiesto = new URLSearchParams(window.location.search).get("stile");
+      if (richiesto) localStorage.setItem("silicious-stile", richiesto);
+      else richiesto = localStorage.getItem("silicious-stile");
+    } catch (e) { /* niente URLSearchParams o niente localStorage: pazienza */ }
+
+    if (richiesto && richiesto !== "base") {
+      document.documentElement.setAttribute("data-stile", richiesto);
+    } else {
+      document.documentElement.removeAttribute("data-stile");
+    }
+  }
+
   function collegaNavigazione() {
     var bottone = el(".menu-toggle");
     var nav = el(".nav");
@@ -642,6 +663,7 @@
   };
 
   function avvia() {
+    applicaStileDiProva();
     collegaNavigazione();
     riempiSegnaposto();
     collegaModuli();
