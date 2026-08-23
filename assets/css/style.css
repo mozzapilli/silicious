@@ -165,7 +165,7 @@ section p, .racconto-annata p, .dati dd { max-width: 68ch; }
 
 /* ------------------------------ Sezioni --------------------------------- */
 
-section { padding-block: clamp(72px, 11vw, 160px); }
+section { padding-block: clamp(52px, 6.5vw, 104px); }
 section.bordo-sopra { border-top: 1px solid var(--linea); }
 
 /* I pastelli si alternano da soli lungo la pagina: nessuna classe da scegliere
@@ -176,7 +176,7 @@ section.alt:nth-of-type(3n)   { background: var(--fondo-3); }
 
 /* Il titolo va tenuto corto perché è grande; il paragrafo sotto no, altrimenti
    verrebbe strozzato su tre parole per riga. */
-.intestazione-sezione { max-width: 74ch; margin-bottom: clamp(40px, 5vw, 72px); }
+.intestazione-sezione { max-width: 74ch; margin-bottom: clamp(32px, 3.5vw, 52px); }
 .intestazione-sezione h1,
 .intestazione-sezione h2 { max-width: 18ch; }
 .intestazione-sezione p.guida { max-width: 58ch; font-size: 1.05em; }
@@ -185,9 +185,9 @@ section.alt:nth-of-type(3n)   { background: var(--fondo-3); }
 
 /* L'apertura è centrata: il marchio disegnato sta al centro della pagina e
    tutto quello che segue si allinea a lui. */
-.hero { padding-block: clamp(48px, 7vw, 96px) clamp(64px, 10vw, 140px); text-align: center; }
+.hero { padding-block: clamp(40px, 5vw, 72px) clamp(48px, 7vw, 96px); text-align: center; }
 .hero .logo-grande {
-  width: min(300px, 62vw); margin: 0 auto clamp(40px, 6vw, 72px); color: var(--inchiostro);
+  width: min(250px, 54vw); margin: 0 auto clamp(28px, 4vw, 48px); color: var(--inchiostro);
 }
 .hero .payoff {
   font-size: clamp(2.4rem, 6.4vw, 4.8rem);
@@ -211,7 +211,7 @@ section.alt:nth-of-type(3n)   { background: var(--fondo-3); }
 
 /* ------------------------------- Griglie -------------------------------- */
 
-.griglia { display: grid; gap: 28px; }
+.griglia { display: grid; gap: 24px; }
 .griglia-2 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
 .griglia-3 { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
 .griglia-4 { grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); }
@@ -299,12 +299,12 @@ section.alt .scheda { background: var(--carta); }
 
 .banda-immagine { padding-block: 0; }
 .banda-immagine img {
-  width: 100%; height: clamp(280px, 52vh, 560px); object-fit: cover;
+  width: 100%; height: clamp(220px, 38vh, 420px); object-fit: cover;
   border-block: 1px solid var(--linea);
 }
 
-.galleria { display: grid; gap: 32px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
-.galleria .figura img { aspect-ratio: 3 / 4; object-fit: cover; }
+.galleria { display: grid; gap: 24px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+.galleria .figura img { aspect-ratio: 4 / 5; object-fit: cover; }
 .galleria .figura.orizzontale img { aspect-ratio: 4 / 3; }
 
 /* Schede con fotografia di copertina */
@@ -435,7 +435,7 @@ section.alt .scheda { background: var(--carta); }
 .dati { border-top: 1px solid var(--inchiostro); margin-top: 8px; }
 .dati .riga {
   display: grid; grid-template-columns: minmax(160px, 34%) 1fr; gap: 8px 28px;
-  padding: 16px 0; border-bottom: 1px solid var(--linea);
+  padding: 13px 0; border-bottom: 1px solid var(--linea);
 }
 .dati dt, .dati .voce {
   font-size: .98rem; letter-spacing: .06em; text-transform: uppercase;
@@ -542,3 +542,98 @@ section.alt .scheda { background: var(--carta); }
 .occhiello { letter-spacing: .05em; }
 .tagline   { letter-spacing: .1em; }
 .kpi .etichetta, .indice .etichetta, .dati dt, .site-footer h4 { letter-spacing: .03em; }
+
+/* ==========================================================================
+   IMPAGINAZIONE A DUE COLONNE
+   Su schermo largo il titolo della sezione si mette a sinistra e resta
+   fermo mentre il contenuto scorre. Serve a due cose: accorcia la pagina di
+   quanto misurava il titolo, e dà un senso di movimento senza animare nulla.
+   Sotto i 1000 px torna tutto impilato.
+   ========================================================================== */
+
+@media (min-width: 1000px) {
+  section .container:has(> .intestazione-sezione):not(.stretto) {
+    display: grid;
+    grid-template-columns: minmax(220px, 27%) 1fr;
+    column-gap: clamp(36px, 4.5vw, 72px);
+    align-items: start;
+  }
+  section .container:has(> .intestazione-sezione):not(.stretto) > .intestazione-sezione {
+    margin-bottom: 0;
+    position: sticky;
+    top: 92px;
+  }
+  section .container:has(> .intestazione-sezione):not(.stretto) > *:not(.intestazione-sezione) {
+    grid-column: 2;
+  }
+  /* Nella colonna stretta il titolo non può restare largo 18ch */
+  section .container:has(> .intestazione-sezione):not(.stretto) .intestazione-sezione h1,
+  section .container:has(> .intestazione-sezione):not(.stretto) .intestazione-sezione h2 {
+    max-width: none;
+    font-size: clamp(1.9rem, 2.9vw, 2.9rem);
+  }
+  section .container:has(> .intestazione-sezione):not(.stretto) .intestazione-sezione p.guida {
+    max-width: none;
+    font-size: .98em;
+  }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  html.anima [data-anima] { opacity: 1; transform: none; transition: none; }
+}
+
+/* ==========================================================================
+   ANIMAZIONI ALLO SCORRIMENTO
+   Sono animazioni CSS legate alla posizione dell'elemento nella finestra:
+   niente JavaScript, niente stato "nascosto" da riaccendere. Se il browser
+   non le sostiene, il blocco @supports viene ignorato e la pagina resta
+   semplicemente ferma — non può succedere che un pezzo resti invisibile.
+   ========================================================================== */
+
+@keyframes entra {
+  from { opacity: 0; transform: translateY(26px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes riempi {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+@supports/* Nota: qui si animano solo elementi legati allo scorrimento. Niente
+   animazioni a tempo sull'apertura: se per qualsiasi motivo non partissero,
+   il marchio resterebbe invisibile. */
+ (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+
+    main .intestazione-sezione,
+    main .griglia > *,
+    main .tempo,
+    main .figura,
+    main .grafico,
+    main .citazione,
+    main .nota-box,
+    main .dati,
+    main .ampolla,
+    main .modulo,
+    .banda-immagine img {
+      animation: entra linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 40%;
+    }
+
+    /* Le schede affiancate sono tutte alla stessa altezza: senza questo
+       entrerebbero all'unisono. Facendole finire in momenti diversi si
+       ottiene una cascata da sinistra a destra. */
+    main .griglia > *:nth-child(3n + 2) { animation-range: entry 0% entry 52%; }
+    main .griglia > *:nth-child(3n)     { animation-range: entry 0% entry 64%; }
+
+    /* La barra del tempo si riempie da sinistra mentre entra. */
+    .barra > i {
+      transform-origin: left center;
+      animation: riempi linear both;
+      animation-timeline: view();
+      animation-range: entry 5% entry 55%;
+    }
+  }
+}
