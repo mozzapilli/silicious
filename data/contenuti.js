@@ -28,15 +28,18 @@ window.SILICIOUS = {
     nome: "Silicious APS",
     nomeEsteso: "Associazione di Promozione Sociale Silicious",
     payoff: "Message in a'mpolla",
-    costituzione: "2026",
-    codiceFiscale: "DA COMPLETARE",          // DA COMPLETARE — codice fiscale attribuito
-    runts: "Iscrizione in corso",            // DA COMPLETARE — numero e data di iscrizione al RUNTS
-    sede: "DA COMPLETARE",                   // DA COMPLETARE — indirizzo della sede legale
-    email: "info@silicious.org",             // DA COMPLETARE — casella reale da attivare
+    costituzione: "16 giugno 2026",
+    codiceFiscale: "94166290307",
+    /* Domanda presentata, iscrizione non ancora perfezionata. Quando arriva
+       il numero di repertorio, sostituire questa riga. */
+    runts: "Domanda di iscrizione presentata il 10 agosto 2026 — pratica TSFO-01_002797906",
+    sede: "Piazza Paolo Diacono 8 — 33043 Cividale del Friuli (UD)",
+    email: "info@silicious.it",
     iban: "DA COMPLETARE",                   // DA COMPLETARE — IBAN del conto associativo
-    presidente: "Silvio Broggi",
-    vicePresidente: "Marco Broggi",
-    sociFondatori: 7,
+    presidente: "Marco Broggi",         // ideatore del progetto
+    vicePresidente: "Silvio Broggi",
+    consigliere: "Marta Sherpi",
+    sociFondatori: 9,
     social: {
       instagram: "",                         // DA COMPLETARE — es. "https://instagram.com/silicious"
       facebook: ""                           // DA COMPLETARE
@@ -97,11 +100,11 @@ window.SILICIOUS = {
       copertina: "assets/img/messaggio-01/ampolla-piena.jpg",
       copertinaAlt: "L'ampolla di vetro da 60 litri piena di vino, nella cantina di Fattoria Ispoli",
 
-      /* Colore del liquido nel disegno dell'ampolla.
-         Il sito è in bianco e nero, quindi qui c'è un grigio scuro: è un
-         disegno tecnico, non una fotografia. Se preferisci il vino vero,
-         basta rimettere "#7C1E2B" per un rosso o "#D8B76A" per un bianco. */
-      coloreVino: "#3A3730",
+      /* Colore del vino nel disegno dell'ampolla: l'unico colore di tutto il
+         sito, ed è voluto — lì il colore è un dato, non una decorazione.
+         Sangiovese giovane: rubino con riflessi granato. Per un bianco
+         servirebbe un ambra tipo "#D8B76A". */
+      coloreVino: "#7C1E2B",
 
       /* ---- L'azienda ospitante ----
          Dati verificati sul sito dell'azienda e sul portale del Consorzio.

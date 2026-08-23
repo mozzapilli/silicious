@@ -611,6 +611,8 @@
         runts: a.runts,
         presidente: a.presidente,
         vicePresidente: a.vicePresidente,
+        costituzione: a.costituzione,
+        consigliere: a.consigliere,
         sociFondatori: a.sociFondatori,
         notaKpi: (D.kpi || {}).nota
       };

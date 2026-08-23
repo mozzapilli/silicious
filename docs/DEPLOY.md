@@ -95,8 +95,9 @@ casella di spunta di consenso nel modulo.
 
 ## 6. Cose ancora da mettere a posto
 
-- [ ] Casella e-mail ufficiale su dominio proprio (es. `info@silicious.org`)
-- [ ] Codice fiscale, sede legale, estremi RUNTS e IBAN in `data/contenuti.js`
+- [x] Casella e-mail ufficiale: `info@silicious.it`
+- [x] Codice fiscale, sede legale ed estremi della pratica RUNTS in `data/contenuti.js`
+- [ ] IBAN del conto associativo (ancora da aprire)
 - [x] Fotografie della vigna, della cantina e dell'ampolla (13 dicembre 2025)
 - [ ] Pagina Informativa privacy e Cookie policy
 - [ ] Profili Instagram/Facebook da collegare nel footer
