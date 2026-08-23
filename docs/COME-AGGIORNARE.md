@@ -1,41 +1,5 @@
 # Come aggiornare il sito
 
-## Provare le tre palette (temporaneo)
-
-Finché non hai scelto i colori definitivi, puoi cambiarli aggiungendo un
-parametro all'indirizzo. La scelta resta valida mentre navighi tra le pagine.
-
-| Indirizzo | Palette |
-|---|---|
-| `.../?stile=base` | pesca, verde vigna, cielo — accento rosso vino |
-| `.../?stile=terra` | cotto, salvia, sabbia — accento terracotta |
-| `.../?stile=fredda` | lilla, menta, cielo — accento indaco |
-
-Quando avrai deciso, si tiene la palette scelta in cima a
-`assets/css/style.css` e si cancellano le altre due insieme alla funzione
-`applicaStileDiProva` in `assets/js/site.js`.
-
-
-Tutto quello che cambia nel tempo — numeri, Messaggi, progetti — sta in un solo file:
-
-```
-data/contenuti.js
-```
-
-Si apre con qualsiasi editor di testo (Blocco note va benissimo, meglio ancora
-Visual Studio Code). Le pagine del sito leggono quel file e si aggiornano da sole.
-
-## Tre regole per non rompere niente
-
-1. Il testo va sempre tra `"virgolette doppie"`.
-2. Le righe di un elenco finiscono con una virgola `,` **tranne l'ultima**.
-3. Le date si scrivono `"2026-11-15"` — anno, mese, giorno.
-
-Se dopo una modifica il sito mostra pagine vuote, quasi sempre manca una virgoletta
-o una virgola. Premi `F12` nel browser: la scheda **Console** dice dove.
-
----
-
 ## Aggiornare i numeri (KPI)
 
 Nel blocco `kpi`:

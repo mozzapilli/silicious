@@ -1,78 +1,130 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 330" role="img"
-     aria-label="Disegno a inchiostro di un filare di vigna: pali, filo di ferro, tre persone al lavoro e l'ampolla di vetro appoggiata a terra all'estremità del filare">
-  <g fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 915 485" role="img"
+     aria-label="Tavola disegnata a inchiostro con otto elementi della vigna: un grappolo d'uva, una foglia di vite, un viticcio, un'ape, una coccinella, un lombrico nella terra, una scheggia di selce e un fiore spontaneo">
+  <g fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
 
-    <!-- Il filo del filare: una linea sola, tremolante, che tiene insieme tutto -->
-    <path fill="none" stroke-width="2.6"
-          d="M8 176 C150 168 250 184 372 175 C520 164 610 186 742 177 C880 168 980 187 1108 178 C1230 170 1320 184 1394 176"/>
-
-    <!-- La terra -->
-    <path fill="none" stroke-width="2.2" opacity=".55"
-          d="M0 268 C180 262 300 274 470 266 C660 257 820 273 1010 265 C1180 258 1300 270 1400 263"/>
-
-    <!-- Pali: barre nere irregolari, con il piede sfrangiato come un pennello scarico -->
-    <path d="M84 84 L104 80 L108 250 L106 276 L101 262 L98 288 L93 268 L89 282 L86 252 Z"/>
-    <path d="M296 96 L314 92 L317 248 L315 280 L311 264 L307 290 L303 266 L299 278 L297 250 Z"/>
-    <path d="M528 78 L549 74 L552 252 L550 284 L545 266 L541 292 L537 268 L533 280 L530 254 Z"/>
-    <path d="M762 92 L781 88 L784 246 L782 278 L777 262 L774 286 L769 264 L765 276 L763 248 Z"/>
-    <path d="M986 82 L1006 78 L1009 250 L1007 282 L1002 264 L999 290 L994 266 L990 278 L988 252 Z"/>
-    <path d="M1176 98 L1194 94 L1197 244 L1195 274 L1190 258 L1187 284 L1182 262 L1178 274 L1177 246 Z"/>
-
-    <!-- Tralci: pochi segni sopra il filo, come potati da poco -->
-    <g fill="none" stroke-width="2.2" opacity=".8">
-      <path d="M104 168 C130 150 152 158 168 138"/>
-      <path d="M108 172 C86 154 70 160 54 142"/>
-      <path d="M314 170 C338 152 358 160 372 140"/>
-      <path d="M548 166 C572 148 590 156 606 134"/>
-      <path d="M544 170 C524 152 508 158 492 140"/>
-      <path d="M780 168 C804 150 822 158 838 138"/>
-      <path d="M1005 166 C1029 148 1048 156 1064 136"/>
-      <path d="M1001 170 C980 152 964 158 948 140"/>
+    <!-- ============ 1. Grappolo d'uva ============ -->
+    <g transform="translate(20,20)">
+      <path d="M100 18 C98 30 102 38 100 46"/>
+      <path d="M104 26 C118 16 136 22 132 36 C128 48 110 46 104 34 Z"/>
+      <circle cx="66" cy="64" r="17"/>
+      <circle cx="100" cy="64" r="17" fill="currentColor"/>
+      <circle cx="134" cy="64" r="17"/>
+      <circle cx="49" cy="94" r="17"/>
+      <circle cx="83" cy="94" r="17" fill="currentColor"/>
+      <circle cx="117" cy="94" r="17"/>
+      <circle cx="151" cy="94" r="17"/>
+      <circle cx="66" cy="124" r="17"/>
+      <circle cx="100" cy="124" r="17"/>
+      <circle cx="134" cy="124" r="17" fill="currentColor"/>
+      <circle cx="83" cy="152" r="17"/>
+      <circle cx="117" cy="152" r="17"/>
+      <circle cx="100" cy="178" r="17" fill="currentColor"/>
     </g>
 
-    <!-- Primo: cammina lungo il filare portando l'ampolla vuota -->
-    <g fill="none" stroke-width="3.6">
-      <circle cx="196" cy="150" r="11.5"/>
-      <path d="M196 162 C193 178 191 194 189 210"/>
-      <path d="M193 174 C182 170 172 166 163 160"/>
-      <path d="M194 180 C206 184 216 190 224 197"/>
-      <path d="M189 210 C183 226 176 240 170 252"/>
-      <path d="M189 210 C197 224 204 236 208 250"/>
-      <circle cx="234" cy="204" r="17"/>
-      <path d="M228 188 L228 180 L241 180 L241 188"/>
+    <!-- ============ 2. Foglia di vite ============ -->
+    <g transform="translate(245,20)">
+      <path d="M100 188 C98 172 102 162 100 150"/>
+      <path d="M100 150 C74 152 52 148 44 130 C38 116 52 108 46 94
+               C40 78 58 72 68 82 C76 90 84 82 86 64
+               C90 40 110 40 114 64 C116 82 124 90 132 82
+               C142 72 160 78 154 94 C148 108 162 116 156 130
+               C148 148 126 152 100 150 Z"/>
+      <g stroke-width="3">
+        <path d="M100 150 L100 62"/>
+        <path d="M100 150 L60 88"/>
+        <path d="M100 150 L140 88"/>
+        <path d="M100 150 L50 124"/>
+        <path d="M100 150 L150 124"/>
+      </g>
     </g>
 
-    <!-- Secondo: accosciato, lega il tralcio al filo -->
-    <g fill="none" stroke-width="3.6">
-      <circle cx="596" cy="182" r="11"/>
-      <path d="M592 193 C584 205 578 215 574 226"/>
-      <path d="M593 198 C604 190 614 182 624 176"/>
-      <path d="M590 202 C598 196 608 190 618 186"/>
-      <path d="M574 226 C566 236 562 244 562 252"/>
-      <path d="M574 226 C584 236 592 244 596 252"/>
+    <!-- ============ 3. Viticcio ============ -->
+    <g transform="translate(470,20)">
+      <path d="M34 42 C64 46 90 56 108 72"/>
+      <path d="M108 72 C124 88 118 110 102 118 C84 127 70 112 80 100 C88 90 102 96 98 106"/>
+      <path d="M74 52 C86 74 84 104 96 126 C106 144 128 142 130 124 C132 108 114 104 110 118"/>
+      <path d="M150 60 C160 84 156 118 166 142"/>
+      <path d="M166 142 C172 158 158 172 146 164 C136 158 140 144 150 148"/>
     </g>
 
-    <!-- Terzo: in piedi verso l'ampolla, un braccio teso -->
-    <g fill="none" stroke-width="3.6">
-      <circle cx="1112" cy="146" r="11.5"/>
-      <path d="M1112 158 C1112 176 1113 194 1114 210"/>
-      <path d="M1112 172 C1124 172 1138 176 1150 184"/>
-      <path d="M1111 176 C1100 182 1092 190 1086 200"/>
-      <path d="M1114 210 C1110 226 1106 240 1104 254"/>
-      <path d="M1114 210 C1122 224 1128 238 1131 252"/>
+    <!-- ============ 4. Ape ============ -->
+    <g transform="translate(695,20)">
+      <ellipse cx="92" cy="74" rx="30" ry="14" transform="rotate(-22 92 74)"/>
+      <ellipse cx="116" cy="80" rx="22" ry="10" transform="rotate(16 116 80)"/>
+      <ellipse cx="108" cy="112" rx="40" ry="26"/>
+      <circle cx="62" cy="108" r="16"/>
+      <circle cx="56" cy="104" r="3.5" fill="currentColor" stroke="none"/>
+      <path d="M56 96 C50 84 44 80 40 72"/>
+      <path d="M68 94 C66 82 64 78 62 68"/>
+      <path fill="currentColor" stroke="none"
+            d="M96 89 C88 97 88 127 96 135 L108 135 C100 127 100 97 108 89 Z"/>
+      <path fill="currentColor" stroke="none"
+            d="M126 91 C118 99 118 125 126 133 L137 131 C129 123 129 101 137 93 Z"/>
+      <path d="M90 137 L84 158"/>
+      <path d="M110 139 L108 160"/>
+      <path d="M130 135 L136 155"/>
     </g>
 
-    <!-- L'ampolla, in fondo al filare -->
-    <g fill="none" stroke-width="4">
-      <circle cx="1300" cy="204" r="56"/>
-      <path d="M1284 152 L1284 122 L1316 122 L1316 152"/>
-      <path d="M1272 121 L1328 121"/>
-      <path d="M1294 118 L1294 96 C1294 90 1306 90 1306 96 L1306 118"/>
-      <path d="M1268 250 L1258 278 M1300 260 L1300 280 M1332 250 L1342 278"/>
+    <!-- ============ 5. Coccinella ============ -->
+    <g transform="translate(20,265)">
+      <circle cx="100" cy="110" r="46"/>
+      <path fill="currentColor" d="M74 76 C78 54 122 54 126 76 Z"/>
+      <path d="M100 64 L100 156"/>
+      <g fill="currentColor" stroke="none">
+        <circle cx="78" cy="92" r="9"/>
+        <circle cx="122" cy="92" r="9"/>
+        <circle cx="68" cy="118" r="9"/>
+        <circle cx="132" cy="118" r="9"/>
+        <circle cx="88" cy="140" r="9"/>
+        <circle cx="112" cy="140" r="9"/>
+      </g>
+      <path d="M84 58 C80 46 74 42 68 40"/>
+      <path d="M116 58 C120 46 126 42 132 40"/>
     </g>
 
-    <!-- Il vino dentro: una macchia piena, il solo elemento non lineare -->
-    <path fill="currentColor" stroke="none" opacity=".22"
-          d="M1247 214 C1258 246 1276 260 1300 260 C1324 260 1342 246 1353 214 C1330 224 1270 224 1247 214 Z"/>
+    <!-- ============ 6. Lombrico e terra ============ -->
+    <g transform="translate(245,265)">
+      <path d="M30 68 C56 50 74 82 92 94 C112 108 138 98 156 116
+               C172 132 158 162 134 152 C120 146 122 128 134 128"/>
+      <g stroke-width="3">
+        <path d="M62 68 L70 82"/>
+        <path d="M86 84 L94 98"/>
+        <path d="M112 98 L118 112"/>
+        <path d="M138 106 L144 120"/>
+      </g>
+      <g stroke-width="3.5">
+        <path d="M30 178 L44 168"/>
+        <path d="M60 182 L74 172"/>
+        <path d="M92 178 L106 168"/>
+        <path d="M124 182 L138 172"/>
+        <path d="M152 178 L166 168"/>
+      </g>
+    </g>
+
+    <!-- ============ 7. Selce ============ -->
+    <g transform="translate(470,265)">
+      <path fill="currentColor" opacity=".16" stroke="none"
+            d="M110 50 L156 84 L150 142 L104 168 Z"/>
+      <path d="M40 128 L58 68 L110 50 L156 84 L150 142 L104 168 Z"/>
+      <g stroke-width="3">
+        <path d="M58 68 L104 168"/>
+        <path d="M110 50 L150 142"/>
+        <path d="M40 128 L110 50"/>
+      </g>
+    </g>
+
+    <!-- ============ 8. Fiore spontaneo ============ -->
+    <g transform="translate(695,265)">
+      <path d="M100 196 C98 166 104 146 100 124"/>
+      <path d="M100 168 C76 158 60 166 54 180 C72 188 94 182 100 170 Z"/>
+      <path d="M100 146 C124 136 140 144 146 158 C128 166 106 160 100 148 Z"/>
+      <ellipse cx="100" cy="80" rx="16" ry="36"/>
+      <ellipse cx="100" cy="80" rx="16" ry="36" transform="rotate(36 100 80)"/>
+      <ellipse cx="100" cy="80" rx="16" ry="36" transform="rotate(72 100 80)"/>
+      <ellipse cx="100" cy="80" rx="16" ry="36" transform="rotate(108 100 80)"/>
+      <ellipse cx="100" cy="80" rx="16" ry="36" transform="rotate(144 100 80)"/>
+      <circle cx="100" cy="80" r="14" fill="currentColor"/>
+    </g>
+
   </g>
 </svg>
