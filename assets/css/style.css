@@ -321,13 +321,17 @@ section.alt .scheda { background: var(--carta); }
 }
 
 .galleria { display: grid; gap: 24px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
-.galleria .figura img { aspect-ratio: 4 / 5; object-fit: cover; }
+/* Le fotografie del progetto sono tutte verticali 3:4. Il riquadro ha lo
+   stesso rapporto, così non viene ritagliato niente. object-position in alto
+   è una rete di sicurezza: se un giorno finisce qui una foto di formato
+   diverso, a essere sacrificati sono i piedi, non le teste. */
+.galleria .figura img { aspect-ratio: 3 / 4; object-fit: cover; object-position: center top; }
 .galleria .figura.orizzontale img { aspect-ratio: 4 / 3; }
 
 /* Schede con fotografia di copertina */
 .scheda.con-foto { padding: 0; overflow: hidden; }
 .scheda.con-foto .copertina {
-  width: 100%; aspect-ratio: 4 / 3; object-fit: cover;
+  width: 100%; aspect-ratio: 3 / 4; object-fit: cover; object-position: center top;
   border-bottom: 1px solid var(--linea); background: var(--carta-alt);
 }
 .scheda.con-foto .corpo { padding: 26px 28px 28px; display: flex; flex-direction: column; flex: 1; }

@@ -69,6 +69,10 @@ copertina: "assets/img/messaggio-01/ampolla-piena.jpg",
 copertinaAlt: "Descrizione della foto per chi non la può vedere",
 ```
 
+**Falle verticali, formato 3:4** — è la proporzione delle foto del telefono in
+verticale. I riquadri del sito hanno lo stesso rapporto, quindi non ritagliano
+niente. Una foto orizzontale in una scheda viene tagliata sopra e sotto.
+
 Le foto vanno messe in `assets/img/messaggio-01/` (una cartella per Messaggio).
 **Ridimensionale prima di caricarle**: massimo 1400 pixel di lato lungo e qualità
 80. Una foto da telefono pesa 5-8 MB e renderebbe il sito lentissimo.
