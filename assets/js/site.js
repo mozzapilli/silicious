@@ -148,16 +148,26 @@
 
   /* ---------------------------- Barre del tempo ------------------------- */
 
-  function barraMessaggio(m) {
+  /* base: prefisso per arrivare alla pagina del Messaggio da dove ci troviamo.
+     Se è null il titolo resta testo — serve nella pagina del Messaggio stesso,
+     dove un collegamento a sé non ha senso. */
+  function barraMessaggio(m, base) {
     var f = faseCorrente(m);
     var p = m.stato === "concluso" ? 100 : percentuale(f.da, f.a);
     var conto = f.contoLabel
       ? '<span class="conto">' + esc(mancano(f.a)) + "<small>" + esc(f.contoLabel) + "</small></span>"
       : "";
 
+    var nome = "Messaggio n°" + esc(m.numero) + " — " + esc(m.titolo);
+    var titolo = (base === null || base === undefined)
+      ? '<span class="titolo">' + nome + "</span>"
+      : '<a class="titolo" href="' + esc(base + m.pagina) + '">' + nome + "</a>";
+
+    var vaiAllaScheda = (base === null || base === undefined) ? "" :
+      '<a class="vai-scheda" href="' + esc(base + m.pagina) + '">Vedi la scheda del Messaggio</a>';
+
     return '<article class="tempo">' +
-        '<div class="testata">' +
-          '<span class="titolo">Messaggio n°' + esc(m.numero) + " — " + esc(m.titolo) + "</span>" +
+        '<div class="testata">' + titolo +
           '<span class="fase ' + f.classe + '">' + esc(f.etichetta) + "</span>" +
         "</div>" +
         '<p class="sottotesto">' + esc(m.azienda) + ", " + esc(m.luogo) + ". " + esc(f.descrizione) + "</p>" +
@@ -165,17 +175,18 @@
         '<div class="barra-estremi">' +
           "<span>" + esc(f.daLabel) + " · " + esc(meseAnno(f.da)) + "</span>" +
           "<span>" + esc(f.aLabel) + " · " + esc(meseAnno(f.a)) + "</span>" +
-        "</div>" + conto +
+        "</div>" + conto + vaiAllaScheda +
       "</article>";
   }
 
   function renderTempo(nodo) {
+    var base = nodo.getAttribute("data-base") || "";
     var messaggi = (D.messaggi || []).filter(function (m) { return m.stato !== "concluso"; });
     if (!messaggi.length) {
       nodo.innerHTML = '<p class="vuoto">Nessun Messaggio in corso in questo momento.</p>';
       return;
     }
-    nodo.innerHTML = messaggi.map(barraMessaggio).join("");
+    nodo.innerHTML = messaggi.map(function (m) { return barraMessaggio(m, base); }).join("");
   }
 
   /* ----------------------------- Archivio ------------------------------- */
@@ -200,7 +211,10 @@
             "<h3>" + esc(m.titolo) + "</h3>" +
             "<p><strong>" + esc(m.azienda) + "</strong><br>" + esc(m.luogo) + "</p>" +
             "<p>" + esc(m.denominazione) + " · " + esc(m.vitigno) + "</p>" +
-            '<div class="piede"><span class="fase ' + f.classe + '">' + esc(f.etichetta) + "</span></div>" +
+            '<div class="piede">' +
+              '<span class="fase ' + f.classe + '">' + esc(f.etichetta) + "</span>" +
+              '<span class="vai-scheda">Vedi la scheda</span>' +
+            "</div>" +
           "</div>" +
         "</a>";
     }).join("");

@@ -658,3 +658,23 @@ section.alt .scheda { background: var(--carta); }
     }
   }
 }
+
+/* --------------------- Rimandi alla scheda del Messaggio ------------------
+   Il blocco "L'ampolla adesso" e le schede d'archivio devono dire a voce
+   alta dove portano: prima il titolo era testo muto e il rimando non si
+   vedeva. -------------------------------------------------------------- */
+
+.tempo a.titolo { color: var(--inchiostro); text-decoration: none; }
+.tempo a.titolo:hover { text-decoration: underline; text-underline-offset: 5px; }
+
+.vai-scheda {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: .92rem;
+  color: var(--accento);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.tempo .vai-scheda { margin-top: 22px; }
+.scheda .piede .vai-scheda { margin-top: 10px; display: block; }
+.scheda-link:hover .vai-scheda { color: var(--inchiostro); }
